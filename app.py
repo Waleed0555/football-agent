@@ -49,17 +49,24 @@ def chat():
     if not question:
         return jsonify({"error": "No message"}), 400
     conversation_history.append({"role": "user", "content": question})
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1000,
-        system="You are FootballGPT, an expert football analyst specialising in comparing players and teams across different eras.",
-        messages=conversation_history
-    )
-    answer = response.content[0].text
-    conversation_history.append({"role": "assistant", "content": answer})
-    increment_usage(user_key)
-    remaining = questions_remaining(user_key)
-    return jsonify({"response": answer, "remaining": remaining})
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1000,
+            system="You are FootballGPT, an expert football analyst specialising in comparing players and teams across different eras.",
+            messages=conversation_history
+        )
+        answer = response.content[0].text
+        conversation_history.append({"role": "assistant", "content": answer})
+        increment_usage(user_key)
+        remaining = questions_remaining(user_key)
+        return jsonify({"response": answer, "remaining": remaining})
+    except Exception as e:
+        conversation_history.pop()
+        error_msg = str(e)
+        if "credit" in error_msg.lower() or "billing" in error_msg.lower():
+            return jsonify({"error": "service_unavailable", "message": "⚽ FootballGPT is temporarily unavailable due to high demand. Please check back soon!"}), 503
+        return jsonify({"error": "service_unavailable", "message": "⚽ Something went wrong. Please try again in a moment!"}), 503
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
