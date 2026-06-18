@@ -7,8 +7,6 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0a0a0a; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-
-  /* NAVBAR */
   .navbar { background: #1a1a2e; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; height: 56px; flex-shrink: 0; }
   .navbar h1 { color: #4ade80; font-size: 1.2rem; }
   .nav-links { display: flex; gap: 8px; }
@@ -18,8 +16,6 @@
   .counter { background: #0f3460; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; color: #4ade80; font-weight: bold; }
   .counter.low { color: #ff9800; background: #2a1a00; }
   .counter.empty { color: #f44336; background: #2a0000; }
-
-  /* PAGES */
   .page { display: none; flex: 1; flex-direction: column; }
   .page.active { display: flex; }
 
@@ -36,32 +32,26 @@
   .input-area button:hover { background: #22c55e; }
   .input-area button:disabled { background: #333; color: #666; cursor: not-allowed; }
 
-  /* DRAFT PAGE */
+  /* DRAFT */
   .draft-wrap { padding: 16px; overflow-y: auto; flex: 1; }
   .draft-header { text-align: center; margin-bottom: 12px; }
   .draft-header h2 { color: #4ade80; font-size: 1.3rem; }
   .draft-header p { color: #aaa; font-size: 0.8rem; margin-top: 4px; }
-
-  /* FORMATION BAR */
   .formation-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; background: #16213e; padding: 10px 16px; border-radius: 10px; flex-wrap: wrap; }
   .formation-bar label { color: #aaa; font-size: 0.8rem; }
   .formation-select { background: #1e1e2e; border: 1px solid #4ade80; color: #4ade80; padding: 5px 10px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; }
   .draft-status-bar { background: #16213e; border-radius: 8px; padding: 8px 16px; text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: #93c5fd; border: 1px solid #0f3460; }
-
-  /* PITCH */
-  .pitch-wrap { display: flex; gap: 16px; }
-  .your-pitch-col { flex: 1; max-width: 340px; margin: 0 auto; }
+  .pitch-wrap { display: flex; justify-content: center; }
+  .your-pitch-col { width: 100%; max-width: 340px; }
   .pitch { background: linear-gradient(180deg, #1a4a1a 0%, #1e5c1e 50%, #1a4a1a 100%); border: 2px solid #2d6a2d; border-radius: 10px; position: relative; width: 100%; aspect-ratio: 0.65; overflow: hidden; }
   .pitch-lines { position: absolute; inset: 0; pointer-events: none; }
   .position-slot { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; z-index: 2; transition: transform 0.15s; }
   .position-slot:hover { transform: translate(-50%, -50%) scale(1.1); }
   .slot-circle { width: 40px; height: 40px; border-radius: 50%; border: 2px dashed #4ade80; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; margin: 0 auto 2px; font-size: 0.62rem; font-weight: bold; color: #4ade80; transition: all 0.2s; }
   .position-slot.filled .slot-circle { border: 2px solid #4ade80; background: #4ade80; color: #000; font-size: 0.55rem; }
-  .slot-label { font-size: 0.52rem; color: rgba(255,255,255,0.7); white-space: nowrap; max-width: 50px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; }
   .position-slot.empty-slot .slot-circle { animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{border-color:#4ade80;} 50%{border-color:#22c55e; box-shadow:0 0 8px #4ade80;} }
-
-  /* BENCH */
+  .slot-label { font-size: 0.52rem; color: rgba(255,255,255,0.7); white-space: nowrap; max-width: 50px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; }
   .bench-section { margin-top: 12px; background: #111; border: 1px solid #333; border-radius: 8px; padding: 10px; }
   .bench-section h4 { color: #aaa; font-size: 0.75rem; margin-bottom: 6px; }
   .bench-players { display: flex; flex-wrap: wrap; gap: 4px; min-height: 24px; }
@@ -69,13 +59,14 @@
   .bench-add-btn { padding: 3px 9px; border-radius: 12px; font-size: 0.7rem; background: #1a1a1a; color: #555; border: 1px dashed #333; cursor: pointer; }
   .bench-add-btn:hover { border-color: #4ade80; color: #4ade80; }
 
-  /* POPUP MODAL */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; display: none; align-items: center; justify-content: center; }
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
-  .modal { background: #16213e; border: 1px solid #0f3460; border-radius: 16px; padding: 24px; width: 90%; max-width: 480px; }
+  .modal { background: #16213e; border: 1px solid #0f3460; border-radius: 16px; padding: 24px; width: 92%; max-width: 480px; }
   .modal h3 { color: #fff; font-size: 1rem; margin-bottom: 4px; }
   .modal p { color: #aaa; font-size: 0.78rem; margin-bottom: 16px; }
   .modal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .modal-empty { color: #666; font-size: 0.8rem; text-align: center; padding: 20px; grid-column: span 5; }
   .player-card { background: #1e1e2e; border: 2px solid #333; border-radius: 8px; padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.2s; }
   .player-card:hover { border-color: #4ade80; transform: translateY(-2px); background: #1a3a1a; }
   .player-card .p-nat { font-size: 0.9rem; }
@@ -85,24 +76,20 @@
   .modal-cancel { margin-top: 12px; width: 100%; background: #1a1a1a; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
   .modal-cancel:hover { border-color: #f44336; color: #f44336; }
 
-  /* REVEAL & SIM */
+  /* SIM */
   .sim-section { display: none; padding: 20px; text-align: center; }
-  .reveal-btn { background: linear-gradient(135deg, #f44336, #c62828); color: #fff; border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-bottom: 16px; margin-right: 10px; }
+  .reveal-btn { background: linear-gradient(135deg, #f44336, #c62828); color: #fff; border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-bottom: 16px; }
   .reveal-btn:hover { transform: scale(1.03); }
-  .sim-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-bottom: 16px; }
-  .sim-btn:hover { transform: scale(1.03); }
-  .sim-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; }
-
-  /* AI TEAM REVEAL */
   .ai-reveal { display: none; background: #16213e; border: 1px solid #f44336; border-radius: 12px; padding: 16px; margin-bottom: 16px; text-align: left; }
   .ai-reveal h3 { color: #f44336; margin-bottom: 10px; font-size: 0.9rem; }
   .ai-pitch-small { background: linear-gradient(180deg, #1a4a1a 0%, #1e5c1e 50%, #1a4a1a 100%); border: 1px solid #2d6a2d; border-radius: 8px; position: relative; width: 200px; aspect-ratio: 0.65; margin: 0 auto 10px; }
   .ai-slot-small { position: absolute; transform: translate(-50%,-50%); text-align: center; }
   .ai-slot-circle { width: 28px; height: 28px; border-radius: 50%; background: #f44336; border: 1px solid #c62828; display: flex; align-items: center; justify-content: center; margin: 0 auto 1px; font-size: 0.45rem; font-weight: bold; color: #fff; }
-  .ai-bench-row { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ai-bench-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
   .ai-bench-tag { padding: 2px 7px; border-radius: 10px; font-size: 0.65rem; background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
-
-  /* MATCH RESULT */
+  .sim-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; }
+  .sim-btn:hover { transform: scale(1.03); }
+  .sim-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; }
   .sim-result { background: #0a0a0a; border: 1px solid #4ade80; border-radius: 12px; padding: 20px; text-align: left; display: none; margin-top: 16px; }
   .sim-result h3 { color: #4ade80; margin-bottom: 12px; }
   .sim-result pre { color: #e0e0e0; font-size: 0.83rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.7; }
@@ -137,7 +124,7 @@
   <div class="draft-wrap">
     <div class="draft-header">
       <h2>🏆 Draft Mode</h2>
-      <p>Click a position on the pitch to pick your player. Fill all 11 spots then simulate!</p>
+      <p>Click a position on the pitch to pick your player. Fill all 11 spots + 9 bench then simulate!</p>
     </div>
 
     <div class="formation-bar">
@@ -150,9 +137,9 @@
         <option value="4-1-4-1">4-1-4-1</option>
       </select>
       <span style="color:#555;">|</span>
-      <span style="color:#aaa; font-size:0.8rem;">Starters: <strong id="starterCount" style="color:#4ade80">0</strong>/11</span>
+      <span style="color:#aaa;font-size:0.8rem;">Starters: <strong id="starterCount" style="color:#4ade80">0</strong>/11</span>
       <span style="color:#555;">|</span>
-      <span style="color:#aaa; font-size:0.8rem;">Bench: <strong id="benchCountLabel" style="color:#4ade80">0</strong>/9</span>
+      <span style="color:#aaa;font-size:0.8rem;">Bench: <strong id="benchCountLabel" style="color:#4ade80">0</strong>/9</span>
     </div>
 
     <div class="draft-status-bar" id="draftStatusBar">
@@ -176,24 +163,22 @@
           </svg>
         </div>
         <div class="bench-section">
-          <h4>🪑 Bench (<span id="benchCountDisplay">0</span>/9) — <span style="color:#555; font-weight:normal;">Click to add players to bench</span></h4>
+          <h4>🪑 Bench (<span id="benchCountDisplay">0</span>/9)</h4>
           <div class="bench-players" id="yourBenchDisplay">
-            <button class="bench-add-btn" onclick="openBenchPick()" id="benchAddBtn">+ Add bench player</button>
+            <button class="bench-add-btn" onclick="openBenchPick()">+ Add bench player</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SIM SECTION -->
     <div class="sim-section" id="simSection">
-      <h2 style="color:#4ade80; margin-bottom:8px;">🏆 Your squad is complete!</h2>
-      <p style="color:#aaa; font-size:0.85rem; margin-bottom:20px;">The AI has secretly built its team. Ready to reveal and simulate?</p>
-      <button class="reveal-btn" onclick="revealAndSimulate()">👁️ Reveal AI Team & Simulate</button>
+      <h2 style="color:#4ade80;margin-bottom:8px;">🏆 Your squad is complete!</h2>
+      <p style="color:#aaa;font-size:0.85rem;margin-bottom:20px;">The AI has secretly built its team. Ready to reveal and simulate?</p>
+      <button class="reveal-btn" id="revealBtn" onclick="revealAndSimulate()">👁️ Reveal AI Team & Simulate</button>
     </div>
 
-    <!-- AI REVEAL -->
     <div class="ai-reveal" id="aiReveal">
-      <h3>🤖 AI's Team (<span id="aiFormationLabel"></span>)</h3>
+      <h3>🤖 AI's Team — <span id="aiFormationLabel"></span></h3>
       <div class="ai-pitch-small" id="aiPitchSmall">
         <svg class="pitch-lines" viewBox="0 0 100 154" xmlns="http://www.w3.org/2000/svg">
           <line x1="1" y1="77" x2="99" y2="77" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
@@ -201,6 +186,9 @@
         </svg>
       </div>
       <div class="ai-bench-row" id="aiBenchDisplay"></div>
+      <div style="text-align:center;margin-top:16px;">
+        <button class="sim-btn" id="simBtn" onclick="runSimulation()">⚽ Simulate Match!</button>
+      </div>
       <div class="sim-result" id="simResult">
         <h3>⚽ Match Result</h3>
         <pre id="simText"></pre>
@@ -208,13 +196,10 @@
       </div>
     </div>
 
-    <div style="text-align:center; margin-top:12px; display:none" id="simBtnWrap">
-      <button class="sim-btn" id="simBtn" onclick="runSimulation()">⚽ Simulate Match!</button>
-    </div>
   </div>
 </div>
 
-<!-- PLAYER PICK MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3 id="modalTitle">Choose a player</h3>
@@ -225,9 +210,8 @@
 </div>
 
 <script>
-// ── FORMATIONS ──
 const FORMATIONS = {
-  "4-3-3": [
+  "4-3-3":[
     {pos:"GK",x:50,y:90},
     {pos:"RB",x:82,y:76},{pos:"CB",x:62,y:72},{pos:"CB",x:38,y:72},{pos:"LB",x:18,y:76},
     {pos:"CM",x:72,y:54},{pos:"CM",x:50,y:51},{pos:"CM",x:28,y:54},
@@ -262,12 +246,22 @@ const FORMATIONS = {
 };
 
 const POS_COMPAT = {
-  GK:["GK"],RB:["RB","CB","CDM"],LB:["LB","CB","CDM"],CB:["CB","CDM","RB","LB"],
-  CDM:["CDM","CM","CB"],CM:["CM","CDM","CAM","RM","LM"],CAM:["CAM","CM","ST","RW","LW"],
-  RW:["RW","LW","CAM","ST","RM"],LW:["LW","RW","CAM","ST","LM"],
-  RM:["RM","RW","CM"],LM:["LM","LW","CM"],RAM:["RAM","RW","CAM","CM"],
-  LAM:["LAM","LW","CAM","CM"],RWB:["RWB","RB","RM"],LWB:["LWB","LB","LM"],
-  ST:["ST","CAM","RW","LW"]
+  GK:  ["GK"],
+  RB:  ["RB"],
+  LB:  ["LB"],
+  CB:  ["CB"],
+  CDM: ["CDM","CM"],
+  CM:  ["CM","CDM","CAM"],
+  CAM: ["CAM","CM"],
+  RAM: ["RAM","RW","CAM"],
+  LAM: ["LAM","LW","CAM"],
+  RM:  ["RM","RW"],
+  LM:  ["LM","LW"],
+  RW:  ["RW","RM"],
+  LW:  ["LW","LM"],
+  RWB: ["RWB","RB"],
+  LWB: ["LWB","LB"],
+  ST:  ["ST"]
 };
 
 const ALL_PLAYERS = [
@@ -389,6 +383,13 @@ const ALL_PLAYERS = [
   {name:"Batistuta",pos:"ST",era:"1988–2005",nat:"🇦🇷"},
   {name:"Klinsmann",pos:"ST",era:"1981–1998",nat:"🇩🇪"},
   {name:"Weah",pos:"ST",era:"1988–2003",nat:"🇱🇷"},
+  {name:"Beckham RM",pos:"RM",era:"1992–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Salgado",pos:"RM",era:"1994–2008",nat:"🇪🇸"},
+  {name:"Park Ji-sung",pos:"RM",era:"2000–2014",nat:"🇰🇷"},
+  {name:"Recoba",pos:"LM",era:"1994–2011",nat:"🇺🇾"},
+  {name:"Pires",pos:"LM",era:"1993–2010",nat:"🇫🇷"},
+  {name:"Maldini RB",pos:"RB",era:"1985–2009",nat:"🇮🇹"},
+  {name:"Hargreaves",pos:"CDM",era:"1999–2012",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
 ];
 
 let pool = [];
@@ -415,7 +416,6 @@ function initDraft() {
   document.getElementById("simSection").style.display = "none";
   document.getElementById("aiReveal").style.display = "none";
   document.getElementById("simResult").style.display = "none";
-  document.getElementById("simBtnWrap").style.display = "none";
   document.getElementById("draftStatusBar").textContent = "👆 Click any position on the pitch to pick a player for that spot";
   renderYourPitch();
   updateCounts();
@@ -433,7 +433,7 @@ function renderYourPitch() {
     el.style.left = slot.x + "%";
     el.style.top = slot.y + "%";
     if (slot.player) {
-      el.innerHTML = `<div class="slot-circle">${slot.player.nat}<br><span style="font-size:0.5rem">${slot.player.name.split(" ")[0]}</span></div><div class="slot-label">${slot.player.name}</div>`;
+      el.innerHTML = `<div class="slot-circle">${slot.player.nat}<br><span style="font-size:0.48rem">${slot.player.name.split(" ")[0]}</span></div><div class="slot-label">${slot.player.name}</div>`;
     } else {
       el.innerHTML = `<div class="slot-circle">${slot.pos}</div><div class="slot-label">Empty</div>`;
       el.onclick = () => openPickModal(i);
@@ -452,7 +452,6 @@ function updateCounts() {
     draftDone = true;
     document.getElementById("simSection").style.display = "block";
     document.getElementById("draftStatusBar").textContent = "✅ Squad complete! Scroll down to reveal the AI team and simulate!";
-    // Silently complete AI team
     completeAiTeam();
   } else if (starters === 11) {
     document.getElementById("draftStatusBar").textContent = "✅ Starting 11 complete! Now fill your bench (9 players)";
@@ -461,20 +460,18 @@ function updateCounts() {
 
 function updateBenchDisplay() {
   const container = document.getElementById("yourBenchDisplay");
-  container.innerHTML = yourBench.map(p => `<span class="bench-tag">${p.nat} ${p.name}</span>`).join("") +
+  container.innerHTML = yourBench.map(p =>
+    `<span class="bench-tag">${p.nat} ${p.name}</span>`).join("") +
     (yourBench.length < 9 ? `<button class="bench-add-btn" onclick="openBenchPick()">+ Add bench player</button>` : "");
 }
 
 function getRandomOptions(targetPos) {
-  // Prefer compatible players but ensure variety
   const compat = POS_COMPAT[targetPos] || [targetPos];
-  const compatible = pool.filter(p => compat.includes(p.pos) && !pickedNames.has(p.name));
-  const others = pool.filter(p => !compat.includes(p.pos) && !pickedNames.has(p.name));
-  let options = compatible.slice(0, 3);
-  const fill = others.slice(0, 5 - options.length);
-  options = [...options, ...fill];
-  // Shuffle
-  return options.sort(() => Math.random() - 0.5).slice(0, 5);
+  const options = pool
+    .filter(p => compat.includes(p.pos) && !pickedNames.has(p.name))
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
+  return options;
 }
 
 function openPickModal(slotIndex) {
@@ -482,9 +479,9 @@ function openPickModal(slotIndex) {
   isBenchPick = false;
   const slot = yourSlots[slotIndex];
   document.getElementById("modalTitle").textContent = `Pick your ${slot.pos}`;
-  document.getElementById("modalSubtitle").textContent = `Choose 1 from 5 random legends for this position`;
+  document.getElementById("modalSubtitle").textContent = `Only showing players who can play ${slot.pos}`;
   const options = getRandomOptions(slot.pos);
-  buildModalGrid(options);
+  buildModalGrid(options, slot.pos);
   document.getElementById("modalOverlay").classList.add("open");
 }
 
@@ -492,14 +489,21 @@ function openBenchPick() {
   if (yourBench.length >= 9) return;
   isBenchPick = true;
   document.getElementById("modalTitle").textContent = "Pick a bench player";
-  document.getElementById("modalSubtitle").textContent = `Bench spot ${yourBench.length + 1}/9 — choose any player`;
-  const options = pool.filter(p => !pickedNames.has(p.name)).sort(() => Math.random() - 0.5).slice(0, 5);
-  buildModalGrid(options);
+  document.getElementById("modalSubtitle").textContent = `Bench spot ${yourBench.length + 1}/9 — any available player`;
+  const options = pool
+    .filter(p => !pickedNames.has(p.name))
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
+  buildModalGrid(options, null);
   document.getElementById("modalOverlay").classList.add("open");
 }
 
-function buildModalGrid(options) {
+function buildModalGrid(options, targetPos) {
   const grid = document.getElementById("modalGrid");
+  if (options.length === 0) {
+    grid.innerHTML = `<div class="modal-empty">No more ${targetPos || "players"} available in the pool!</div>`;
+    return;
+  }
   grid.innerHTML = "";
   options.forEach(p => {
     const card = document.createElement("div");
@@ -520,7 +524,6 @@ function selectPlayer(player) {
     yourSlots[currentSlotIndex].player = player;
     renderYourPitch();
   }
-  // AI also picks one silently
   aiPickSilent();
   updateCounts();
   closeModal();
@@ -532,11 +535,10 @@ function aiPickSilent() {
   const available = pool.filter(p => !pickedNames.has(p.name));
   if (available.length === 0) return;
   let best = null;
-  if (neededPos.length > 0) {
-    best = available.find(p => {
-      const compat = POS_COMPAT[p.pos] || [p.pos];
-      return neededPos.some(np => compat.includes(np));
-    });
+  for (const np of neededPos) {
+    const compat = POS_COMPAT[np] || [np];
+    best = available.find(p => compat.includes(p.pos));
+    if (best) break;
   }
   if (!best) best = available[0];
   pickedNames.add(best.name);
@@ -575,11 +577,10 @@ function closeModal() {
 }
 
 function revealAndSimulate() {
-  // Show AI team
   document.getElementById("aiReveal").style.display = "block";
   document.getElementById("aiFormationLabel").textContent = aiFormationKey;
+  document.getElementById("revealBtn").style.display = "none";
 
-  // Build small AI pitch
   const aiPitch = document.getElementById("aiPitchSmall");
   aiPitch.querySelectorAll(".ai-slot-small").forEach(e => e.remove());
   aiSlots.forEach(slot => {
@@ -592,23 +593,17 @@ function revealAndSimulate() {
     aiPitch.appendChild(el);
   });
 
-  // Show AI bench
   document.getElementById("aiBenchDisplay").innerHTML =
-    `<span style="color:#aaa; font-size:0.75rem; margin-right:6px;">Bench:</span>` +
+    `<span style="color:#aaa;font-size:0.75rem;margin-right:6px;">Bench:</span>` +
     aiBench.map(p => `<span class="ai-bench-tag">${p.nat} ${p.name}</span>`).join("");
-
-  document.getElementById("simBtnWrap").style.display = "block";
-  document.querySelector(".reveal-btn").style.display = "none";
 }
 
 async function runSimulation() {
   const btn = document.getElementById("simBtn");
   btn.textContent = "⚽ Simulating...";
   btn.disabled = true;
-
   const yourStarters = yourSlots.filter(s => s.player).map(s => `${s.pos}: ${s.player.name}`);
   const aiStarters = aiSlots.filter(s => s.player).map(s => `${s.pos}: ${s.player.name}`);
-
   try {
     const res = await fetch("/simulate", {
       method: "POST",
@@ -635,7 +630,7 @@ async function runSimulation() {
 
 function resetDraft() { initDraft(); }
 
-// ── CHAT ──
+// CHAT
 const chatBox = document.getElementById("chatBox");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
