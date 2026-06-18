@@ -75,20 +75,22 @@ def simulate():
     ai_formation = data.get("ai_formation", "4-3-3")
     your_starters = data.get("your_starters", [])
     ai_starters = data.get("ai_starters", [])
+    your_team_name = data.get("your_team_name", "Your Team")
+    ai_team_name = data.get("ai_team_name", "AI Team")
 
     prompt = f"""Simulate a football match between these two squads.
 
-YOUR TEAM ({your_formation}): {', '.join(your_starters)}
-AI TEAM ({ai_formation}): {', '.join(ai_starters)}
+{your_team_name} ({your_formation}): {', '.join(your_starters)}
+{ai_team_name} ({ai_formation}): {', '.join(ai_starters)}
 
 Reply in this exact format only, nothing else:
 
-RESULT: Your Team X - Y AI Team
+RESULT: {your_team_name} X - Y {ai_team_name}
 
 SCORERS:
-⚽ [minute]' [player] ([Your Team or AI Team])
+⚽ [minute]' [player] ([{your_team_name} or {ai_team_name}])
 
-WINNER: [Your Team / AI Team / Draw]
+WINNER: [{your_team_name} / {ai_team_name} / Draw]
 
 MAN OF THE MATCH: [player name]"""
 
@@ -101,6 +103,34 @@ MAN OF THE MATCH: [player name]"""
         return jsonify({"result": response.content[0].text})
     except Exception as e:
         return jsonify({"error": "Something went wrong with the simulation"}), 503
+
+@app.route("/simulate_ai_vs_ai", methods=["POST"])
+def simulate_ai_vs_ai():
+    data = request.json
+    team1_name = data.get("team1_name", "AI Team 1")
+    team2_name = data.get("team2_name", "AI Team 2")
+    team1_players = data.get("team1_players", [])
+    team2_players = data.get("team2_players", [])
+
+    prompt = f"""Simulate a football match between {team1_name} and {team2_name}.
+
+{team1_name}: {', '.join(team1_players)}
+{team2_name}: {', '.join(team2_players)}
+
+Reply in this exact format only:
+
+WINNER: [{team1_name} or {team2_name} or Draw]
+SCORE: X-Y"""
+
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=100,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return jsonify({"result": response.content[0].text})
+    except Exception as e:
+        return jsonify({"error": "Something went wrong"}), 503
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
