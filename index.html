@@ -33,44 +33,46 @@
   .input-area button:disabled { background: #333; color: #666; cursor: not-allowed; }
 
   /* DRAFT */
-  .draft-wrap { padding: 16px; overflow-y: auto; flex: 1; }
-  .draft-header { text-align: center; margin-bottom: 12px; }
-  .draft-header h2 { color: #4ade80; font-size: 1.3rem; }
-  .draft-header p { color: #aaa; font-size: 0.8rem; margin-top: 4px; }
-  .formation-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; background: #16213e; padding: 10px 16px; border-radius: 10px; flex-wrap: wrap; }
-  .formation-bar label { color: #aaa; font-size: 0.8rem; }
-  .formation-select { background: #1e1e2e; border: 1px solid #4ade80; color: #4ade80; padding: 5px 10px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; }
-  .draft-status-bar { background: #16213e; border-radius: 8px; padding: 8px 16px; text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: #93c5fd; border: 1px solid #0f3460; }
+  .draft-wrap { padding: 12px; overflow-y: auto; flex: 1; }
+  .draft-header { text-align: center; margin-bottom: 10px; }
+  .draft-header h2 { color: #4ade80; font-size: 1.1rem; }
+  .draft-header p { color: #aaa; font-size: 0.75rem; margin-top: 3px; }
+  .formation-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; background: #16213e; padding: 8px 12px; border-radius: 8px; flex-wrap: wrap; }
+  .formation-bar label { color: #aaa; font-size: 0.75rem; }
+  .formation-select { background: #1e1e2e; border: 1px solid #4ade80; color: #4ade80; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
+  .draft-status-bar { background: #16213e; border-radius: 6px; padding: 6px 12px; text-align: center; margin-bottom: 10px; font-size: 0.75rem; color: #93c5fd; border: 1px solid #0f3460; }
 
-  /* PITCHES SIDE BY SIDE */
-  .pitches-row { display: flex; gap: 12px; margin-bottom: 12px; }
-  .pitch-col { flex: 1; }
-  .pitch-col h3 { font-size: 0.82rem; text-align: center; margin-bottom: 6px; padding: 4px 8px; border-radius: 6px; }
+  /* PITCHES SIDE BY SIDE — SMALLER */
+  .pitches-row { display: flex; gap: 10px; margin-bottom: 10px; justify-content: center; }
+  .pitch-col { width: 170px; flex-shrink: 0; }
+  .pitch-col h3 { font-size: 0.72rem; text-align: center; margin-bottom: 4px; padding: 3px 6px; border-radius: 5px; }
   .pitch-col.yours h3 { color: #4ade80; background: #1a3a1a; }
   .pitch-col.ai-col h3 { color: #f44336; background: #3a1a1a; }
-  .pitch { background: linear-gradient(180deg, #1a4a1a 0%, #1e5c1e 50%, #1a4a1a 100%); border: 2px solid #2d6a2d; border-radius: 10px; position: relative; width: 100%; aspect-ratio: 0.65; overflow: hidden; }
+  .pitch { background: linear-gradient(180deg, #1a4a1a 0%, #1e5c1e 50%, #1a4a1a 100%); border: 2px solid #2d6a2d; border-radius: 8px; position: relative; width: 100%; aspect-ratio: 0.65; overflow: hidden; }
   .pitch-lines { position: absolute; inset: 0; pointer-events: none; }
+
+  /* POSITION SLOTS — SMALL */
   .position-slot { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; z-index: 2; transition: transform 0.15s; }
   .position-slot:hover { transform: translate(-50%, -50%) scale(1.1); }
-  .slot-circle { width: 36px; height: 36px; border-radius: 50%; border: 2px dashed #4ade80; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; margin: 0 auto 2px; font-size: 0.6rem; font-weight: bold; color: #4ade80; transition: all 0.2s; flex-direction: column; line-height: 1.1; }
-  .position-slot.filled .slot-circle { border: 2px solid #4ade80; background: #4ade80; color: #000; }
+  .slot-circle { width: 22px; height: 22px; border-radius: 50%; border: 1.5px dashed #4ade80; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; margin: 0 auto 1px; font-size: 0.42rem; font-weight: bold; color: #4ade80; flex-direction: column; line-height: 1.1; }
+  .position-slot.filled .slot-circle { border: 1.5px solid #4ade80; background: #4ade80; color: #000; }
   .position-slot.empty-slot .slot-circle { animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{border-color:#4ade80;} 50%{border-color:#22c55e; box-shadow:0 0 8px #4ade80;} }
-  .slot-label { font-size: 0.5rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 44px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
+  @keyframes pulse { 0%,100%{border-color:#4ade80;} 50%{border-color:#22c55e; box-shadow:0 0 6px #4ade80;} }
+  .slot-label { font-size: 0.38rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 36px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
 
-  /* AI PITCH SLOTS */
+  /* AI SLOTS — SMALL */
   .ai-position-slot { position: absolute; transform: translate(-50%,-50%); text-align: center; z-index: 2; }
-  .ai-slot-circle { width: 36px; height: 36px; border-radius: 50%; background: #f44336; border: 2px solid #c62828; display: flex; align-items: center; justify-content: center; margin: 0 auto 2px; font-size: 0.5rem; font-weight: bold; color: #fff; flex-direction: column; line-height: 1.1; }
-  .ai-slot-label { font-size: 0.5rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 44px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
+  .ai-slot-circle { width: 22px; height: 22px; border-radius: 50%; background: #f44336; border: 1.5px solid #c62828; display: flex; align-items: center; justify-content: center; margin: 0 auto 1px; font-size: 0.42rem; font-weight: bold; color: #fff; flex-direction: column; line-height: 1.1; }
+  .ai-slot-label { font-size: 0.38rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 36px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
 
   /* BENCH */
-  .bench-section { background: #111; border: 1px solid #333; border-radius: 8px; padding: 8px; margin-bottom: 12px; }
-  .bench-section h4 { color: #aaa; font-size: 0.72rem; margin-bottom: 5px; }
-  .bench-players { display: flex; flex-wrap: wrap; gap: 4px; min-height: 20px; }
-  .bench-tag { padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; background: #1a3a1a; color: #4ade80; border: 1px solid #4ade80; }
-  .bench-add-btn { padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; background: #1a1a1a; color: #555; border: 1px dashed #333; cursor: pointer; }
+  .bench-section { background: #111; border: 1px solid #333; border-radius: 6px; padding: 6px 8px; margin-bottom: 10px; }
+  .bench-section h4 { color: #aaa; font-size: 0.68rem; margin-bottom: 4px; }
+  .bench-players { display: flex; flex-wrap: wrap; gap: 3px; min-height: 18px; }
+  .bench-tag { padding: 2px 6px; border-radius: 8px; font-size: 0.62rem; background: #1a3a1a; color: #4ade80; border: 1px solid #4ade80; }
+  .bench-add-btn { padding: 2px 6px; border-radius: 8px; font-size: 0.62rem; background: #1a1a1a; color: #555; border: 1px dashed #333; cursor: pointer; }
   .bench-add-btn:hover { border-color: #4ade80; color: #4ade80; }
-  .ai-bench-tag { padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
+  .ai-bench-tag { padding: 2px 6px; border-radius: 8px; font-size: 0.62rem; background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
 
   /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100; display: none; align-items: center; justify-content: center; }
@@ -89,45 +91,45 @@
   .modal-cancel { margin-top: 12px; width: 100%; background: #1a1a1a; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
   .modal-cancel:hover { border-color: #f44336; color: #f44336; }
 
-  /* SIM BUTTONS */
-  .sim-section { display: none; padding: 16px; text-align: center; }
-  .big-btn { border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin: 6px; transition: transform 0.15s; }
+  /* SIM */
+  .sim-section { display: none; padding: 14px; text-align: center; }
+  .big-btn { border: none; border-radius: 30px; padding: 12px 30px; font-size: 0.9rem; font-weight: bold; cursor: pointer; margin: 5px; transition: transform 0.15s; }
   .big-btn:hover { transform: scale(1.03); }
   .big-btn:disabled { background: #333 !important; color: #666 !important; cursor: not-allowed; transform: none; }
   .green-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; }
   .red-btn { background: linear-gradient(135deg, #f44336, #c62828); color: #fff; }
 
   /* MATCH RESULT */
-  .match-result-box { background: #0a0a0a; border: 1px solid #4ade80; border-radius: 12px; padding: 16px; margin-top: 14px; display: none; }
-  .match-result-box h3 { color: #4ade80; margin-bottom: 10px; font-size: 0.95rem; }
-  .match-result-box pre { color: #e0e0e0; font-size: 0.9rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.8; }
-  .next-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 20px; padding: 10px 28px; font-weight: bold; cursor: pointer; margin-top: 12px; font-size: 0.88rem; }
+  .match-result-box { background: #0a0a0a; border: 1px solid #4ade80; border-radius: 10px; padding: 14px; margin-top: 12px; display: none; text-align: left; }
+  .match-result-box h3 { color: #4ade80; margin-bottom: 8px; font-size: 0.9rem; }
+  .match-result-box pre { color: #e0e0e0; font-size: 0.88rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.8; }
+  .next-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 20px; padding: 9px 24px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 0.85rem; }
   .next-btn:hover { transform: scale(1.03); }
-  .eliminated-box { background: #1a0000; border: 2px solid #f44336; border-radius: 12px; padding: 20px; margin-top: 14px; text-align: center; display: none; }
-  .eliminated-box h2 { color: #f44336; margin-bottom: 8px; }
-  .eliminated-box p { color: #aaa; font-size: 0.85rem; }
-  .champion-box { background: #0a1a0a; border: 2px solid #4ade80; border-radius: 12px; padding: 20px; margin-top: 14px; text-align: center; display: none; }
-  .champion-box h2 { color: #4ade80; font-size: 1.4rem; margin-bottom: 8px; }
-  .champion-box p { color: #aaa; font-size: 0.85rem; }
+  .eliminated-box { background: #1a0000; border: 2px solid #f44336; border-radius: 10px; padding: 16px; margin-top: 12px; text-align: center; display: none; }
+  .eliminated-box h2 { color: #f44336; margin-bottom: 6px; font-size: 1.1rem; }
+  .eliminated-box p { color: #aaa; font-size: 0.82rem; }
+  .champion-box { background: #0a1a0a; border: 2px solid #f0c040; border-radius: 10px; padding: 16px; margin-top: 12px; text-align: center; display: none; }
+  .champion-box h2 { color: #f0c040; font-size: 1.3rem; margin-bottom: 6px; }
+  .champion-box p { color: #aaa; font-size: 0.82rem; }
 
-  /* TOURNAMENT BRACKET */
-  .bracket-wrap { background: #16213e; border: 1px solid #0f3460; border-radius: 12px; padding: 16px; margin-bottom: 16px; overflow-x: auto; }
-  .bracket-wrap h3 { color: #f0c040; font-size: 0.9rem; margin-bottom: 14px; text-align: center; }
-  .bracket { display: flex; gap: 0; align-items: center; min-width: 600px; }
-  .bracket-round { display: flex; flex-direction: column; justify-content: space-around; flex: 1; padding: 0 8px; }
-  .bracket-round-title { color: #aaa; font-size: 0.7rem; text-align: center; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-  .bracket-match { margin: 6px 0; }
-  .bracket-team { background: #1e1e2e; border: 1px solid #333; border-radius: 6px; padding: 6px 10px; font-size: 0.72rem; color: #aaa; margin: 2px 0; display: flex; justify-content: space-between; align-items: center; min-width: 120px; }
+  /* BRACKET */
+  .bracket-wrap { background: #16213e; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; margin-bottom: 12px; overflow-x: auto; }
+  .bracket-wrap h3 { color: #f0c040; font-size: 0.85rem; margin-bottom: 10px; text-align: center; }
+  .bracket { display: flex; align-items: center; min-width: 420px; gap: 0; }
+  .bracket-round { display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 0 6px; gap: 4px; }
+  .bracket-round-title { color: #aaa; font-size: 0.65rem; text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .bracket-match { display: flex; flex-direction: column; gap: 2px; }
+  .bracket-team { background: #1e1e2e; border: 1px solid #333; border-radius: 5px; padding: 5px 8px; font-size: 0.68rem; color: #aaa; display: flex; justify-content: space-between; align-items: center; }
   .bracket-team.you { border-color: #4ade80; color: #4ade80; background: #1a3a1a; font-weight: bold; }
   .bracket-team.winner { border-color: #4ade80; color: #fff; background: #1a3a1a; }
-  .bracket-team.loser { opacity: 0.4; text-decoration: line-through; }
-  .bracket-team.tbd { color: #555; border-color: #222; font-style: italic; }
-  .bracket-score { color: #f0c040; font-weight: bold; font-size: 0.7rem; margin-left: 6px; }
-  .bracket-connector { display: flex; flex-direction: column; justify-content: space-around; width: 20px; }
-  .connector-line { border-right: 1px solid #333; height: 50%; }
+  .bracket-team.loser { opacity: 0.35; text-decoration: line-through; }
+  .bracket-team.tbd { color: #444; border-color: #222; font-style: italic; }
+  .bracket-score { color: #f0c040; font-weight: bold; font-size: 0.65rem; margin-left: 4px; }
+  .bracket-connector { display: flex; flex-direction: column; justify-content: center; width: 16px; align-items: center; }
+  .connector-top { border-top: 1px solid #333; border-right: 1px solid #333; width: 100%; height: 20px; }
+  .connector-bottom { border-bottom: 1px solid #333; border-right: 1px solid #333; width: 100%; height: 20px; }
 
-  /* RESET */
-  .reset-btn { background: #1e1e2e; color: #aaa; border: 1px solid #333; border-radius: 20px; padding: 9px 22px; cursor: pointer; font-size: 0.82rem; margin-top: 12px; }
+  .reset-btn { background: #1e1e2e; color: #aaa; border: 1px solid #333; border-radius: 20px; padding: 8px 20px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
   .reset-btn:hover { border-color: #4ade80; color: #4ade80; }
 </style>
 </head>
@@ -161,9 +163,8 @@
       <p>Draft your team → Beat 3 AI opponents → Become Champion!</p>
     </div>
 
-    <!-- FORMATION BAR -->
     <div class="formation-bar" id="formationBar">
-      <label>Your Formation:</label>
+      <label>Formation:</label>
       <select class="formation-select" id="yourFormation" onchange="resetFormation()">
         <option value="4-3-3">4-3-3</option>
         <option value="4-4-2">4-4-2</option>
@@ -172,16 +173,14 @@
         <option value="4-1-4-1">4-1-4-1</option>
       </select>
       <span style="color:#555;">|</span>
-      <span style="color:#aaa;font-size:0.8rem;">Starters: <strong id="starterCount" style="color:#4ade80">0</strong>/11</span>
+      <span style="color:#aaa;font-size:0.75rem;">Starters: <strong id="starterCount" style="color:#4ade80">0</strong>/11</span>
       <span style="color:#555;">|</span>
-      <span style="color:#aaa;font-size:0.8rem;">Bench: <strong id="benchCountLabel" style="color:#4ade80">0</strong>/9</span>
+      <span style="color:#aaa;font-size:0.75rem;">Bench: <strong id="benchCountLabel" style="color:#4ade80">0</strong>/9</span>
     </div>
 
-    <div class="draft-status-bar" id="draftStatusBar">
-      👆 Click any position on the pitch to pick a player
-    </div>
+    <div class="draft-status-bar" id="draftStatusBar">👆 Click a position on the pitch to pick a player</div>
 
-    <!-- PITCHES SIDE BY SIDE -->
+    <!-- PITCHES -->
     <div class="pitches-row">
       <div class="pitch-col yours">
         <h3>👤 Your Team</h3>
@@ -221,7 +220,7 @@
       </div>
     </div>
 
-    <!-- TOURNAMENT BRACKET -->
+    <!-- BRACKET -->
     <div class="bracket-wrap" id="bracketWrap" style="display:none;">
       <h3>🏆 Tournament Bracket</h3>
       <div class="bracket" id="bracketDisplay"></div>
@@ -229,8 +228,8 @@
 
     <!-- SIM SECTION -->
     <div class="sim-section" id="simSection">
-      <h2 style="color:#4ade80;margin-bottom:6px;" id="simTitle">✅ Squad Complete!</h2>
-      <p style="color:#aaa;font-size:0.82rem;margin-bottom:14px;" id="simSubtitle">Reveal your opponent and simulate the match!</p>
+      <h2 style="color:#4ade80;margin-bottom:6px;font-size:1rem;" id="simTitle">✅ Squad Complete!</h2>
+      <p style="color:#aaa;font-size:0.8rem;margin-bottom:12px;" id="simSubtitle">Reveal your first opponent!</p>
       <button class="big-btn red-btn" id="revealBtn" onclick="revealOpponent()">👁️ Reveal Opponent</button>
       <button class="big-btn green-btn" id="simBtn" onclick="runSimulation()" style="display:none;">⚽ Simulate Match!</button>
       <div class="match-result-box" id="matchResultBox">
@@ -264,7 +263,6 @@
 </div>
 
 <script>
-// ── FORMATIONS ──
 const FORMATIONS = {
   "4-3-3":[
     {pos:"GK",x:50,y:90},{pos:"RB",x:82,y:76},{pos:"CB",x:62,y:72},{pos:"CB",x:38,y:72},{pos:"LB",x:18,y:76},
@@ -303,537 +301,386 @@ const POS_COMPAT = {
 };
 
 const ALL_PLAYERS = [
-  {name:"Buffon",pos:"GK",era:"1995–2023",nat:"🇮🇹"},
-  {name:"Yashin",pos:"GK",era:"1950–1970",nat:"🇷🇺"},
-  {name:"Casillas",pos:"GK",era:"1999–2020",nat:"🇪🇸"},
-  {name:"Neuer",pos:"GK",era:"2005–present",nat:"🇩🇪"},
-  {name:"Schmeichel",pos:"GK",era:"1981–2003",nat:"🇩🇰"},
-  {name:"van der Sar",pos:"GK",era:"1990–2011",nat:"🇳🇱"},
-  {name:"Kahn",pos:"GK",era:"1987–2008",nat:"🇩🇪"},
-  {name:"Zoff",pos:"GK",era:"1961–1983",nat:"🇮🇹"},
-  {name:"Banks",pos:"GK",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Alisson",pos:"GK",era:"2010–present",nat:"🇧🇷"},
+  {name:"Buffon",pos:"GK",era:"1995–2023",nat:"🇮🇹"},{name:"Yashin",pos:"GK",era:"1950–1970",nat:"🇷🇺"},
+  {name:"Casillas",pos:"GK",era:"1999–2020",nat:"🇪🇸"},{name:"Neuer",pos:"GK",era:"2005–present",nat:"🇩🇪"},
+  {name:"Schmeichel",pos:"GK",era:"1981–2003",nat:"🇩🇰"},{name:"van der Sar",pos:"GK",era:"1990–2011",nat:"🇳🇱"},
+  {name:"Kahn",pos:"GK",era:"1987–2008",nat:"🇩🇪"},{name:"Zoff",pos:"GK",era:"1961–1983",nat:"🇮🇹"},
+  {name:"Banks",pos:"GK",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Alisson",pos:"GK",era:"2010–present",nat:"🇧🇷"},
   {name:"Seaman",pos:"GK",era:"1982–2004",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Cafu",pos:"RB",era:"1988–2008",nat:"🇧🇷"},
-  {name:"Dani Alves",pos:"RB",era:"2001–2023",nat:"🇧🇷"},
-  {name:"Lahm",pos:"RB",era:"2002–2017",nat:"🇩🇪"},
-  {name:"Zanetti",pos:"RB",era:"1991–2014",nat:"🇦🇷"},
-  {name:"Trent AA",pos:"RB",era:"2016–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Puyol",pos:"RB",era:"1999–2014",nat:"🇪🇸"},
+  {name:"Cafu",pos:"RB",era:"1988–2008",nat:"🇧🇷"},{name:"Dani Alves",pos:"RB",era:"2001–2023",nat:"🇧🇷"},
+  {name:"Lahm",pos:"RB",era:"2002–2017",nat:"🇩🇪"},{name:"Zanetti",pos:"RB",era:"1991–2014",nat:"🇦🇷"},
+  {name:"Trent AA",pos:"RB",era:"2016–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Puyol",pos:"RB",era:"1999–2014",nat:"🇪🇸"},
   {name:"Maicon",pos:"RB",era:"2001–2017",nat:"🇧🇷"},
-  {name:"Roberto Carlos",pos:"LB",era:"1991–2011",nat:"🇧🇷"},
-  {name:"Maldini",pos:"LB",era:"1985–2009",nat:"🇮🇹"},
-  {name:"Ashley Cole",pos:"LB",era:"1998–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Marcelo",pos:"LB",era:"2005–2023",nat:"🇧🇷"},
-  {name:"Evra",pos:"LB",era:"1999–2019",nat:"🇫🇷"},
-  {name:"Alba",pos:"LB",era:"2008–present",nat:"🇪🇸"},
-  {name:"Beckenbauer",pos:"CB",era:"1964–1983",nat:"🇩🇪"},
-  {name:"Cannavaro",pos:"CB",era:"1993–2011",nat:"🇮🇹"},
-  {name:"Nesta",pos:"CB",era:"1993–2013",nat:"🇮🇹"},
-  {name:"Ferdinand",pos:"CB",era:"1997–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Terry",pos:"CB",era:"1998–2018",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Moore",pos:"CB",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Desailly",pos:"CB",era:"1986–2006",nat:"🇫🇷"},
-  {name:"Baresi",pos:"CB",era:"1977–1997",nat:"🇮🇹"},
-  {name:"Hummels",pos:"CB",era:"2007–present",nat:"🇩🇪"},
-  {name:"Sergio Ramos",pos:"CB",era:"2004–present",nat:"🇪🇸"},
-  {name:"Van Dijk",pos:"CB",era:"2011–present",nat:"🇳🇱"},
-  {name:"Kompany",pos:"CB",era:"2003–2020",nat:"🇧🇪"},
-  {name:"Adams",pos:"CB",era:"1983–2002",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Vidic",pos:"CB",era:"2000–2015",nat:"🇷🇸"},
-  {name:"Stam",pos:"CB",era:"1992–2007",nat:"🇳🇱"},
-  {name:"Thiago Silva",pos:"CB",era:"2003–present",nat:"🇧🇷"},
-  {name:"Vieira",pos:"CDM",era:"1993–2011",nat:"🇫🇷"},
-  {name:"Makelele",pos:"CDM",era:"1991–2011",nat:"🇫🇷"},
-  {name:"Busquets",pos:"CDM",era:"2008–present",nat:"🇪🇸"},
-  {name:"Casemiro",pos:"CDM",era:"2010–present",nat:"🇧🇷"},
-  {name:"Kante",pos:"CDM",era:"2012–present",nat:"🇫🇷"},
-  {name:"Gattuso",pos:"CDM",era:"1995–2013",nat:"🇮🇹"},
-  {name:"Essien",pos:"CDM",era:"2000–2016",nat:"🇬🇭"},
-  {name:"Hargreaves",pos:"CDM",era:"1999–2012",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Xavi",pos:"CM",era:"1998–2019",nat:"🇪🇸"},
-  {name:"Iniesta",pos:"CM",era:"2002–2023",nat:"🇪🇸"},
-  {name:"Pirlo",pos:"CM",era:"1995–2017",nat:"🇮🇹"},
-  {name:"Seedorf",pos:"CM",era:"1992–2014",nat:"🇳🇱"},
-  {name:"Scholes",pos:"CM",era:"1993–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Gerrard",pos:"CM",era:"1998–2016",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Lampard",pos:"CM",era:"1995–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Charlton",pos:"CM",era:"1956–1975",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Platini",pos:"CM",era:"1972–1987",nat:"🇫🇷"},
-  {name:"Nedved",pos:"CM",era:"1991–2009",nat:"🇨🇿"},
-  {name:"Modric",pos:"CM",era:"2003–present",nat:"🇭🇷"},
-  {name:"De Bruyne",pos:"CM",era:"2008–present",nat:"🇧🇪"},
-  {name:"Fabregas",pos:"CM",era:"2003–2019",nat:"🇪🇸"},
-  {name:"Schweinsteiger",pos:"CM",era:"2002–2019",nat:"🇩🇪"},
-  {name:"Ballack",pos:"CM",era:"1995–2012",nat:"🇩🇪"},
-  {name:"Gullit",pos:"CM",era:"1979–1998",nat:"🇳🇱"},
+  {name:"Roberto Carlos",pos:"LB",era:"1991–2011",nat:"🇧🇷"},{name:"Maldini",pos:"LB",era:"1985–2009",nat:"🇮🇹"},
+  {name:"Ashley Cole",pos:"LB",era:"1998–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Marcelo",pos:"LB",era:"2005–2023",nat:"🇧🇷"},
+  {name:"Evra",pos:"LB",era:"1999–2019",nat:"🇫🇷"},{name:"Alba",pos:"LB",era:"2008–present",nat:"🇪🇸"},
+  {name:"Beckenbauer",pos:"CB",era:"1964–1983",nat:"🇩🇪"},{name:"Cannavaro",pos:"CB",era:"1993–2011",nat:"🇮🇹"},
+  {name:"Nesta",pos:"CB",era:"1993–2013",nat:"🇮🇹"},{name:"Ferdinand",pos:"CB",era:"1997–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Terry",pos:"CB",era:"1998–2018",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Moore",pos:"CB",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Desailly",pos:"CB",era:"1986–2006",nat:"🇫🇷"},{name:"Baresi",pos:"CB",era:"1977–1997",nat:"🇮🇹"},
+  {name:"Hummels",pos:"CB",era:"2007–present",nat:"🇩🇪"},{name:"Sergio Ramos",pos:"CB",era:"2004–present",nat:"🇪🇸"},
+  {name:"Van Dijk",pos:"CB",era:"2011–present",nat:"🇳🇱"},{name:"Kompany",pos:"CB",era:"2003–2020",nat:"🇧🇪"},
+  {name:"Adams",pos:"CB",era:"1983–2002",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Vidic",pos:"CB",era:"2000–2015",nat:"🇷🇸"},
+  {name:"Stam",pos:"CB",era:"1992–2007",nat:"🇳🇱"},{name:"Thiago Silva",pos:"CB",era:"2003–present",nat:"🇧🇷"},
+  {name:"Vieira",pos:"CDM",era:"1993–2011",nat:"🇫🇷"},{name:"Makelele",pos:"CDM",era:"1991–2011",nat:"🇫🇷"},
+  {name:"Busquets",pos:"CDM",era:"2008–present",nat:"🇪🇸"},{name:"Casemiro",pos:"CDM",era:"2010–present",nat:"🇧🇷"},
+  {name:"Kante",pos:"CDM",era:"2012–present",nat:"🇫🇷"},{name:"Gattuso",pos:"CDM",era:"1995–2013",nat:"🇮🇹"},
+  {name:"Essien",pos:"CDM",era:"2000–2016",nat:"🇬🇭"},{name:"Hargreaves",pos:"CDM",era:"1999–2012",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Xavi",pos:"CM",era:"1998–2019",nat:"🇪🇸"},{name:"Iniesta",pos:"CM",era:"2002–2023",nat:"🇪🇸"},
+  {name:"Pirlo",pos:"CM",era:"1995–2017",nat:"🇮🇹"},{name:"Seedorf",pos:"CM",era:"1992–2014",nat:"🇳🇱"},
+  {name:"Scholes",pos:"CM",era:"1993–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Gerrard",pos:"CM",era:"1998–2016",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Lampard",pos:"CM",era:"1995–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Charlton",pos:"CM",era:"1956–1975",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Platini",pos:"CM",era:"1972–1987",nat:"🇫🇷"},{name:"Nedved",pos:"CM",era:"1991–2009",nat:"🇨🇿"},
+  {name:"Modric",pos:"CM",era:"2003–present",nat:"🇭🇷"},{name:"De Bruyne",pos:"CM",era:"2008–present",nat:"🇧🇪"},
+  {name:"Fabregas",pos:"CM",era:"2003–2019",nat:"🇪🇸"},{name:"Schweinsteiger",pos:"CM",era:"2002–2019",nat:"🇩🇪"},
+  {name:"Ballack",pos:"CM",era:"1995–2012",nat:"🇩🇪"},{name:"Gullit",pos:"CM",era:"1979–1998",nat:"🇳🇱"},
   {name:"Toure",pos:"CM",era:"2001–2019",nat:"🇨🇮"},
-  {name:"Zidane",pos:"CAM",era:"1988–2006",nat:"🇫🇷"},
-  {name:"Cruyff",pos:"CAM",era:"1964–1984",nat:"🇳🇱"},
-  {name:"Ronaldinho",pos:"CAM",era:"1998–2015",nat:"🇧🇷"},
-  {name:"Kaka",pos:"CAM",era:"2001–2017",nat:"🇧🇷"},
-  {name:"Del Piero",pos:"CAM",era:"1991–2014",nat:"🇮🇹"},
-  {name:"Totti",pos:"CAM",era:"1992–2017",nat:"🇮🇹"},
-  {name:"Baggio",pos:"CAM",era:"1982–2004",nat:"🇮🇹"},
-  {name:"Riquelme",pos:"CAM",era:"1996–2015",nat:"🇦🇷"},
-  {name:"Bergkamp",pos:"CAM",era:"1989–2006",nat:"🇳🇱"},
-  {name:"Maradona",pos:"CAM",era:"1976–1997",nat:"🇦🇷"},
-  {name:"Messi",pos:"CAM",era:"2004–present",nat:"🇦🇷"},
-  {name:"Deco",pos:"CAM",era:"1997–2011",nat:"🇵🇹"},
-  {name:"Best",pos:"RW",era:"1963–1983",nat:"🇬🇧"},
-  {name:"Robben",pos:"RW",era:"2000–2019",nat:"🇳🇱"},
-  {name:"Salah",pos:"RW",era:"2010–present",nat:"🇪🇬"},
-  {name:"Beckham",pos:"RW",era:"1992–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Di Maria",pos:"RW",era:"2005–2024",nat:"🇦🇷"},
-  {name:"Figo",pos:"RW",era:"1990–2009",nat:"🇵🇹"},
+  {name:"Zidane",pos:"CAM",era:"1988–2006",nat:"🇫🇷"},{name:"Cruyff",pos:"CAM",era:"1964–1984",nat:"🇳🇱"},
+  {name:"Ronaldinho",pos:"CAM",era:"1998–2015",nat:"🇧🇷"},{name:"Kaka",pos:"CAM",era:"2001–2017",nat:"🇧🇷"},
+  {name:"Del Piero",pos:"CAM",era:"1991–2014",nat:"🇮🇹"},{name:"Totti",pos:"CAM",era:"1992–2017",nat:"🇮🇹"},
+  {name:"Baggio",pos:"CAM",era:"1982–2004",nat:"🇮🇹"},{name:"Riquelme",pos:"CAM",era:"1996–2015",nat:"🇦🇷"},
+  {name:"Bergkamp",pos:"CAM",era:"1989–2006",nat:"🇳🇱"},{name:"Maradona",pos:"CAM",era:"1976–1997",nat:"🇦🇷"},
+  {name:"Messi",pos:"CAM",era:"2004–present",nat:"🇦🇷"},{name:"Deco",pos:"CAM",era:"1997–2011",nat:"🇵🇹"},
+  {name:"Best",pos:"RW",era:"1963–1983",nat:"🇬🇧"},{name:"Robben",pos:"RW",era:"2000–2019",nat:"🇳🇱"},
+  {name:"Salah",pos:"RW",era:"2010–present",nat:"🇪🇬"},{name:"Beckham",pos:"RW",era:"1992–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Di Maria",pos:"RW",era:"2005–2024",nat:"🇦🇷"},{name:"Figo",pos:"RW",era:"1990–2009",nat:"🇵🇹"},
   {name:"Bale",pos:"RW",era:"2006–2023",nat:"🏴󠁧󠁢󠁷󠁬󠁳󠁿"},
-  {name:"Ribery",pos:"LW",era:"1999–2021",nat:"🇫🇷"},
-  {name:"Hazard",pos:"LW",era:"2007–2023",nat:"🇧🇪"},
-  {name:"Neymar",pos:"LW",era:"2009–present",nat:"🇧🇷"},
-  {name:"Giggs",pos:"LW",era:"1990–2014",nat:"🏴󠁧󠁢󠁷󠁬󠁳󠁿"},
-  {name:"Mane",pos:"LW",era:"2011–present",nat:"🇸🇳"},
-  {name:"Overmars",pos:"LW",era:"1990–2004",nat:"🇳🇱"},
+  {name:"Ribery",pos:"LW",era:"1999–2021",nat:"🇫🇷"},{name:"Hazard",pos:"LW",era:"2007–2023",nat:"🇧🇪"},
+  {name:"Neymar",pos:"LW",era:"2009–present",nat:"🇧🇷"},{name:"Giggs",pos:"LW",era:"1990–2014",nat:"🏴󠁧󠁢󠁷󠁬󠁳󠁿"},
+  {name:"Mane",pos:"LW",era:"2011–present",nat:"🇸🇳"},{name:"Overmars",pos:"LW",era:"1990–2004",nat:"🇳🇱"},
   {name:"Larsson",pos:"LW",era:"1988–2009",nat:"🇸🇪"},
-  {name:"Pelé",pos:"ST",era:"1956–1977",nat:"🇧🇷"},
-  {name:"Ronaldo R9",pos:"ST",era:"1993–2011",nat:"🇧🇷"},
-  {name:"Ronaldo CR7",pos:"ST",era:"2002–present",nat:"🇵🇹"},
-  {name:"Henry",pos:"ST",era:"1994–2012",nat:"🇫🇷"},
-  {name:"Van Basten",pos:"ST",era:"1981–1995",nat:"🇳🇱"},
-  {name:"Shearer",pos:"ST",era:"1988–2006",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Eusebio",pos:"ST",era:"1957–1979",nat:"🇵🇹"},
-  {name:"Puskas",pos:"ST",era:"1943–1966",nat:"🇭🇺"},
-  {name:"Di Stefano",pos:"ST",era:"1945–1966",nat:"🇦🇷"},
-  {name:"Ibrahimovic",pos:"ST",era:"1999–2023",nat:"🇸🇪"},
-  {name:"Shevchenko",pos:"ST",era:"1994–2012",nat:"🇺🇦"},
-  {name:"Suarez",pos:"ST",era:"2005–present",nat:"🇺🇾"},
-  {name:"Lewandowski",pos:"ST",era:"2005–present",nat:"🇵🇱"},
-  {name:"Mbappe",pos:"ST",era:"2015–present",nat:"🇫🇷"},
-  {name:"Haaland",pos:"ST",era:"2016–present",nat:"🇳🇴"},
-  {name:"Tevez",pos:"ST",era:"2001–2019",nat:"🇦🇷"},
-  {name:"Drogba",pos:"ST",era:"1998–2018",nat:"🇨🇮"},
-  {name:"Muller TM",pos:"ST",era:"1964–1981",nat:"🇩🇪"},
-  {name:"Inzaghi",pos:"ST",era:"1991–2012",nat:"🇮🇹"},
-  {name:"Raul",pos:"ST",era:"1992–2015",nat:"🇪🇸"},
-  {name:"Torres",pos:"ST",era:"2001–2019",nat:"🇪🇸"},
-  {name:"Rooney",pos:"ST",era:"2002–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Kane",pos:"ST",era:"2011–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Aguero",pos:"ST",era:"2003–2021",nat:"🇦🇷"},
-  {name:"Owen",pos:"ST",era:"1996–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
-  {name:"Batistuta",pos:"ST",era:"1988–2005",nat:"🇦🇷"},
-  {name:"Klinsmann",pos:"ST",era:"1981–1998",nat:"🇩🇪"},
-  {name:"Weah",pos:"ST",era:"1988–2003",nat:"🇱🇷"},
+  {name:"Pelé",pos:"ST",era:"1956–1977",nat:"🇧🇷"},{name:"Ronaldo R9",pos:"ST",era:"1993–2011",nat:"🇧🇷"},
+  {name:"Ronaldo CR7",pos:"ST",era:"2002–present",nat:"🇵🇹"},{name:"Henry",pos:"ST",era:"1994–2012",nat:"🇫🇷"},
+  {name:"Van Basten",pos:"ST",era:"1981–1995",nat:"🇳🇱"},{name:"Shearer",pos:"ST",era:"1988–2006",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Eusebio",pos:"ST",era:"1957–1979",nat:"🇵🇹"},{name:"Puskas",pos:"ST",era:"1943–1966",nat:"🇭🇺"},
+  {name:"Di Stefano",pos:"ST",era:"1945–1966",nat:"🇦🇷"},{name:"Ibrahimovic",pos:"ST",era:"1999–2023",nat:"🇸🇪"},
+  {name:"Shevchenko",pos:"ST",era:"1994–2012",nat:"🇺🇦"},{name:"Suarez",pos:"ST",era:"2005–present",nat:"🇺🇾"},
+  {name:"Lewandowski",pos:"ST",era:"2005–present",nat:"🇵🇱"},{name:"Mbappe",pos:"ST",era:"2015–present",nat:"🇫🇷"},
+  {name:"Haaland",pos:"ST",era:"2016–present",nat:"🇳🇴"},{name:"Tevez",pos:"ST",era:"2001–2019",nat:"🇦🇷"},
+  {name:"Drogba",pos:"ST",era:"1998–2018",nat:"🇨🇮"},{name:"Muller TM",pos:"ST",era:"1964–1981",nat:"🇩🇪"},
+  {name:"Inzaghi",pos:"ST",era:"1991–2012",nat:"🇮🇹"},{name:"Raul",pos:"ST",era:"1992–2015",nat:"🇪🇸"},
+  {name:"Torres",pos:"ST",era:"2001–2019",nat:"🇪🇸"},{name:"Rooney",pos:"ST",era:"2002–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Kane",pos:"ST",era:"2011–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Aguero",pos:"ST",era:"2003–2021",nat:"🇦🇷"},
+  {name:"Owen",pos:"ST",era:"1996–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{name:"Batistuta",pos:"ST",era:"1988–2005",nat:"🇦🇷"},
+  {name:"Klinsmann",pos:"ST",era:"1981–1998",nat:"🇩🇪"},{name:"Weah",pos:"ST",era:"1988–2003",nat:"🇱🇷"},
   {name:"Park Ji-sung",pos:"RM",era:"2000–2014",nat:"🇰🇷"},
-  {name:"Pires",pos:"LM",era:"1993–2010",nat:"🇫🇷"},
-  {name:"Recoba",pos:"LM",era:"1994–2011",nat:"🇺🇾"},
+  {name:"Pires",pos:"LM",era:"1993–2010",nat:"🇫🇷"},{name:"Recoba",pos:"LM",era:"1994–2011",nat:"🇺🇾"},
 ];
 
-// ── TOURNAMENT STATE ──
 const ROUND_NAMES = ["Quarter Final","Semi Final","Final"];
 const AI_TEAM_NAMES = ["Galaxy XI","Legends FC","World XI","Elite Squad","Dream Team","Immortals FC","All Stars XI","Icons United"];
 
-let pool = [];
-let yourSlots = [];
-let yourBench = [];
-let pickedNames = new Set();
-let currentSlotIndex = null;
-let isBenchPick = false;
-let draftDone = false;
-
-// Tournament
-let tournamentRound = 0; // 0=QF, 1=SF, 2=Final
-let tournamentResults = []; // {round, opponent, yourScore, aiScore, won}
-let currentAiSlots = [];
-let currentAiFormation = "";
-let currentAiBench = [];
-let currentOpponentName = "";
-let bracketData = {}; // stores all bracket info
+let pool=[], yourSlots=[], yourBench=[], pickedNames=new Set();
+let currentSlotIndex=null, isBenchPick=false, draftDone=false;
+let tournamentRound=0, tournamentResults=[];
+let currentAiSlots=[], currentAiFormation="", currentAiBench=[], currentOpponentName="";
 
 function generateAiTeam(excludeNames) {
-  const formations = Object.keys(FORMATIONS);
-  const formation = formations[Math.floor(Math.random() * formations.length)];
-  const slots = FORMATIONS[formation].map(s => ({...s, player: null}));
-  const bench = [];
-  const used = new Set(excludeNames);
-  const shuffled = [...ALL_PLAYERS].filter(p => !used.has(p.name)).sort(() => Math.random() - 0.5);
-
-  // Fill starters by position
-  for (const slot of slots) {
-    const compat = POS_COMPAT[slot.pos] || [slot.pos];
-    const match = shuffled.find(p => compat.includes(p.pos) && !used.has(p.name));
-    if (match) { slot.player = match; used.add(match.name); }
+  const formations=Object.keys(FORMATIONS);
+  const formation=formations[Math.floor(Math.random()*formations.length)];
+  const slots=FORMATIONS[formation].map(s=>({...s,player:null}));
+  const bench=[];
+  const used=new Set(excludeNames);
+  const shuffled=[...ALL_PLAYERS].filter(p=>!used.has(p.name)).sort(()=>Math.random()-0.5);
+  for(const slot of slots){
+    const compat=POS_COMPAT[slot.pos]||[slot.pos];
+    const match=shuffled.find(p=>compat.includes(p.pos)&&!used.has(p.name));
+    if(match){slot.player=match;used.add(match.name);}
   }
-  // Fill bench
-  const remaining = shuffled.filter(p => !used.has(p.name));
-  for (let i = 0; i < Math.min(9, remaining.length); i++) {
-    bench.push(remaining[i]);
-    used.add(remaining[i].name);
-  }
-  return { formation, slots, bench };
+  const remaining=shuffled.filter(p=>!used.has(p.name));
+  for(let i=0;i<Math.min(9,remaining.length);i++){bench.push(remaining[i]);used.add(remaining[i].name);}
+  return{formation,slots,bench};
 }
 
-function initDraft() {
-  pool = [...ALL_PLAYERS].sort(() => Math.random() - 0.5);
-  pickedNames = new Set();
-  const yf = document.getElementById("yourFormation").value;
-  yourSlots = FORMATIONS[yf].map(s => ({...s, player: null}));
-  yourBench = [];
-  draftDone = false;
-  currentSlotIndex = null;
-  isBenchPick = false;
-  tournamentRound = 0;
-  tournamentResults = [];
-  bracketData = {};
-  currentAiSlots = []; currentAiBench = []; currentOpponentName = "";
-
-  document.getElementById("simSection").style.display = "none";
-  document.getElementById("matchResultBox").style.display = "none";
-  document.getElementById("eliminatedBox").style.display = "none";
-  document.getElementById("championBox").style.display = "none";
-  document.getElementById("bracketWrap").style.display = "none";
-  document.getElementById("aiPitchCol").style.display = "none";
-  document.getElementById("revealBtn").style.display = "inline-block";
-  document.getElementById("simBtn").style.display = "none";
-  document.getElementById("draftStatusBar").textContent = "👆 Click any position on the pitch to pick a player";
-  renderYourPitch();
-  updateCounts();
-  updateBenchDisplay();
+function initDraft(){
+  pool=[...ALL_PLAYERS].sort(()=>Math.random()-0.5);
+  pickedNames=new Set();
+  const yf=document.getElementById("yourFormation").value;
+  yourSlots=FORMATIONS[yf].map(s=>({...s,player:null}));
+  yourBench=[];draftDone=false;currentSlotIndex=null;isBenchPick=false;
+  tournamentRound=0;tournamentResults=[];
+  currentAiSlots=[];currentAiBench=[];currentOpponentName="";
+  document.getElementById("simSection").style.display="none";
+  document.getElementById("matchResultBox").style.display="none";
+  document.getElementById("eliminatedBox").style.display="none";
+  document.getElementById("championBox").style.display="none";
+  document.getElementById("bracketWrap").style.display="none";
+  document.getElementById("aiPitchCol").style.display="none";
+  document.getElementById("revealBtn").style.display="inline-block";
+  document.getElementById("simBtn").style.display="none";
+  document.getElementById("draftStatusBar").textContent="👆 Click a position on the pitch to pick a player";
+  const ab=document.getElementById("aiBenchSection");if(ab)ab.remove();
+  renderYourPitch();updateCounts();updateBenchDisplay();
 }
 
-function resetFormation() { initDraft(); }
+function resetFormation(){initDraft();}
 
-function renderYourPitch() {
-  const pitch = document.getElementById("yourPitch");
-  pitch.querySelectorAll(".position-slot").forEach(e => e.remove());
-  yourSlots.forEach((slot, i) => {
-    const el = document.createElement("div");
-    el.className = "position-slot" + (slot.player ? " filled" : " empty-slot");
-    el.style.left = slot.x + "%";
-    el.style.top = slot.y + "%";
-    if (slot.player) {
-      el.innerHTML = `<div class="slot-circle"><span style="font-size:0.8rem">${slot.player.nat}</span><span style="font-size:0.48rem;font-weight:bold">${slot.player.name.split(" ")[0]}</span></div><div class="slot-label">${slot.player.name}</div>`;
-    } else {
-      el.innerHTML = `<div class="slot-circle">${slot.pos}</div><div class="slot-label">Empty</div>`;
-      el.onclick = () => openPickModal(i);
+function renderYourPitch(){
+  const pitch=document.getElementById("yourPitch");
+  pitch.querySelectorAll(".position-slot").forEach(e=>e.remove());
+  yourSlots.forEach((slot,i)=>{
+    const el=document.createElement("div");
+    el.className="position-slot"+(slot.player?" filled":" empty-slot");
+    el.style.left=slot.x+"%";el.style.top=slot.y+"%";
+    if(slot.player){
+      el.innerHTML=`<div class="slot-circle"><span style="font-size:0.7rem">${slot.player.nat}</span><span style="font-size:0.38rem;font-weight:bold;display:block">${slot.player.name.split(" ")[0]}</span></div><div class="slot-label">${slot.player.name}</div>`;
+    }else{
+      el.innerHTML=`<div class="slot-circle">${slot.pos}</div><div class="slot-label">Empty</div>`;
+      el.onclick=()=>openPickModal(i);
     }
     pitch.appendChild(el);
   });
 }
 
-function renderAiPitch(slots) {
-  const pitch = document.getElementById("aiPitch");
-  pitch.querySelectorAll(".ai-position-slot").forEach(e => e.remove());
-  slots.forEach(slot => {
-    if (!slot.player) return;
-    const el = document.createElement("div");
-    el.className = "ai-position-slot";
-    el.style.left = slot.x + "%";
-    el.style.top = slot.y + "%";
-    el.innerHTML = `<div class="ai-slot-circle"><span style="font-size:0.8rem">${slot.player.nat}</span><span style="font-size:0.42rem;font-weight:bold">${slot.player.name.split(" ")[0]}</span></div><div class="ai-slot-label">${slot.player.name}</div>`;
+function renderAiPitch(slots){
+  const pitch=document.getElementById("aiPitch");
+  pitch.querySelectorAll(".ai-position-slot").forEach(e=>e.remove());
+  slots.forEach(slot=>{
+    if(!slot.player)return;
+    const el=document.createElement("div");
+    el.className="ai-position-slot";
+    el.style.left=slot.x+"%";el.style.top=slot.y+"%";
+    el.innerHTML=`<div class="ai-slot-circle"><span style="font-size:0.7rem">${slot.player.nat}</span><span style="font-size:0.38rem;font-weight:bold;display:block">${slot.player.name.split(" ")[0]}</span></div><div class="ai-slot-label">${slot.player.name}</div>`;
     pitch.appendChild(el);
   });
 }
 
-function updateCounts() {
-  const starters = yourSlots.filter(s => s.player).length;
-  const bench = yourBench.length;
-  document.getElementById("starterCount").textContent = starters;
-  document.getElementById("benchCountLabel").textContent = bench;
-  document.getElementById("benchCountDisplay").textContent = bench;
-  if (starters === 11 && bench === 9 && !draftDone) {
-    draftDone = true;
-    document.getElementById("simSection").style.display = "block";
-    document.getElementById("simTitle").textContent = "✅ Squad Complete!";
-    document.getElementById("simSubtitle").textContent = `Round 1: ${ROUND_NAMES[0]} — Reveal your opponent!`;
-    document.getElementById("draftStatusBar").textContent = "✅ Squad complete! Scroll down to start the tournament!";
-  } else if (starters === 11) {
-    document.getElementById("draftStatusBar").textContent = "✅ Starting 11 done! Now fill your bench (9 players)";
+function updateCounts(){
+  const starters=yourSlots.filter(s=>s.player).length;
+  const bench=yourBench.length;
+  document.getElementById("starterCount").textContent=starters;
+  document.getElementById("benchCountLabel").textContent=bench;
+  document.getElementById("benchCountDisplay").textContent=bench;
+  if(starters===11&&bench===9&&!draftDone){
+    draftDone=true;
+    document.getElementById("simSection").style.display="block";
+    document.getElementById("simTitle").textContent="✅ Squad Complete!";
+    document.getElementById("simSubtitle").textContent=`Round 1: ${ROUND_NAMES[0]} — Reveal your opponent!`;
+    document.getElementById("draftStatusBar").textContent="✅ Squad complete! Scroll down to start the tournament!";
+  }else if(starters===11){
+    document.getElementById("draftStatusBar").textContent="✅ Starting 11 done! Now fill your bench (9 players)";
   }
 }
 
-function updateBenchDisplay() {
-  const c = document.getElementById("yourBenchDisplay");
-  c.innerHTML = yourBench.map(p => `<span class="bench-tag">${p.nat} ${p.name}</span>`).join("") +
-    (yourBench.length < 9 ? `<button class="bench-add-btn" onclick="openBenchPick()">+ Add bench player</button>` : "");
+function updateBenchDisplay(){
+  const c=document.getElementById("yourBenchDisplay");
+  c.innerHTML=yourBench.map(p=>`<span class="bench-tag">${p.nat} ${p.name}</span>`).join("")+
+    (yourBench.length<9?`<button class="bench-add-btn" onclick="openBenchPick()">+ Add bench player</button>`:"");
 }
 
-function getRandomOptions(targetPos) {
-  const compat = POS_COMPAT[targetPos] || [targetPos];
-  return pool.filter(p => compat.includes(p.pos) && !pickedNames.has(p.name))
-    .sort(() => Math.random() - 0.5).slice(0, 5);
+function getRandomOptions(targetPos){
+  const compat=POS_COMPAT[targetPos]||[targetPos];
+  return pool.filter(p=>compat.includes(p.pos)&&!pickedNames.has(p.name)).sort(()=>Math.random()-0.5).slice(0,5);
 }
 
-function openPickModal(slotIndex) {
-  currentSlotIndex = slotIndex; isBenchPick = false;
-  const slot = yourSlots[slotIndex];
-  document.getElementById("modalTitle").textContent = `Pick your ${slot.pos}`;
-  document.getElementById("modalSubtitle").textContent = `Only players who can play ${slot.pos}`;
-  buildModalGrid(getRandomOptions(slot.pos), slot.pos);
+function openPickModal(slotIndex){
+  currentSlotIndex=slotIndex;isBenchPick=false;
+  const slot=yourSlots[slotIndex];
+  document.getElementById("modalTitle").textContent=`Pick your ${slot.pos}`;
+  document.getElementById("modalSubtitle").textContent=`Only players who can play ${slot.pos}`;
+  buildModalGrid(getRandomOptions(slot.pos),slot.pos);
   document.getElementById("modalOverlay").classList.add("open");
 }
 
-function openBenchPick() {
-  if (yourBench.length >= 9) return;
-  isBenchPick = true;
-  document.getElementById("modalTitle").textContent = "Pick a bench player";
-  document.getElementById("modalSubtitle").textContent = `Bench ${yourBench.length + 1}/9 — any available player`;
-  const options = pool.filter(p => !pickedNames.has(p.name)).sort(() => Math.random() - 0.5).slice(0, 5);
-  buildModalGrid(options, null);
+function openBenchPick(){
+  if(yourBench.length>=9)return;
+  isBenchPick=true;
+  document.getElementById("modalTitle").textContent="Pick a bench player";
+  document.getElementById("modalSubtitle").textContent=`Bench ${yourBench.length+1}/9`;
+  const options=pool.filter(p=>!pickedNames.has(p.name)).sort(()=>Math.random()-0.5).slice(0,5);
+  buildModalGrid(options,null);
   document.getElementById("modalOverlay").classList.add("open");
 }
 
-function buildModalGrid(options, targetPos) {
-  const grid = document.getElementById("modalGrid");
-  if (options.length === 0) {
-    grid.innerHTML = `<div class="modal-empty">No more ${targetPos||"players"} available!</div>`;
-    return;
-  }
-  grid.innerHTML = "";
-  options.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "player-card";
-    card.innerHTML = `<div class="p-nat">${p.nat}</div><div class="p-name">${p.name}</div><div class="p-pos">${p.pos}</div><div class="p-era">${p.era}</div>`;
-    card.onclick = () => selectPlayer(p);
+function buildModalGrid(options,targetPos){
+  const grid=document.getElementById("modalGrid");
+  if(options.length===0){grid.innerHTML=`<div class="modal-empty">No more ${targetPos||"players"} available!</div>`;return;}
+  grid.innerHTML="";
+  options.forEach(p=>{
+    const card=document.createElement("div");
+    card.className="player-card";
+    card.innerHTML=`<div class="p-nat">${p.nat}</div><div class="p-name">${p.name}</div><div class="p-pos">${p.pos}</div><div class="p-era">${p.era}</div>`;
+    card.onclick=()=>selectPlayer(p);
     grid.appendChild(card);
   });
 }
 
-function selectPlayer(player) {
+function selectPlayer(player){
   pickedNames.add(player.name);
-  pool = pool.filter(p => p.name !== player.name);
-  if (isBenchPick) { yourBench.push(player); updateBenchDisplay(); }
-  else { yourSlots[currentSlotIndex].player = player; renderYourPitch(); }
-  updateCounts();
-  closeModal();
+  pool=pool.filter(p=>p.name!==player.name);
+  if(isBenchPick){yourBench.push(player);updateBenchDisplay();}
+  else{yourSlots[currentSlotIndex].player=player;renderYourPitch();}
+  updateCounts();closeModal();
 }
 
-function closeModal() {
-  document.getElementById("modalOverlay").classList.remove("open");
-  currentSlotIndex = null;
-}
+function closeModal(){document.getElementById("modalOverlay").classList.remove("open");currentSlotIndex=null;}
 
-// ── TOURNAMENT ──
-function revealOpponent() {
-  const allPicked = new Set([...pickedNames]);
-  const ai = generateAiTeam(allPicked);
-  currentAiSlots = ai.slots;
-  currentAiFormation = ai.formation;
-  currentAiBench = ai.bench;
-
-  // Pick opponent name
-  const usedNames = tournamentResults.map(r => r.opponent);
-  const available = AI_TEAM_NAMES.filter(n => !usedNames.includes(n));
-  currentOpponentName = available[Math.floor(Math.random() * available.length)] || "AI Legends";
-
-  // Show AI pitch
-  document.getElementById("aiPitchCol").style.display = "block";
-  document.getElementById("aiPitchTitle").textContent = `🤖 ${currentOpponentName} (${currentAiFormation})`;
+function revealOpponent(){
+  const allPicked=new Set([...pickedNames]);
+  const ai=generateAiTeam(allPicked);
+  currentAiSlots=ai.slots;currentAiFormation=ai.formation;currentAiBench=ai.bench;
+  const usedNames=tournamentResults.map(r=>r.opponent);
+  const available=AI_TEAM_NAMES.filter(n=>!usedNames.includes(n));
+  currentOpponentName=available[Math.floor(Math.random()*available.length)]||"AI Legends";
+  document.getElementById("aiPitchCol").style.display="block";
+  document.getElementById("aiPitchTitle").textContent=`🤖 ${currentOpponentName} (${currentAiFormation})`;
   renderAiPitch(currentAiSlots);
-
-  // Show bench
-  const aiBenchHtml = currentAiBench.map(p => `<span class="ai-bench-tag">${p.nat} ${p.name}</span>`).join("");
-  const benchSec = document.getElementById("yourBenchDisplay").closest(".bench-section");
-  let aiBenchDiv = document.getElementById("aiBenchSection");
-  if (!aiBenchDiv) {
-    aiBenchDiv = document.createElement("div");
-    aiBenchDiv.id = "aiBenchSection";
-    aiBenchDiv.className = "bench-section";
-    aiBenchDiv.style.marginTop = "6px";
-    benchSec.parentNode.insertBefore(aiBenchDiv, benchSec.nextSibling);
+  const aiBenchHtml=currentAiBench.map(p=>`<span class="ai-bench-tag">${p.nat} ${p.name}</span>`).join("");
+  let aiBenchDiv=document.getElementById("aiBenchSection");
+  if(!aiBenchDiv){
+    aiBenchDiv=document.createElement("div");
+    aiBenchDiv.id="aiBenchSection";aiBenchDiv.className="bench-section";aiBenchDiv.style.marginTop="6px";
+    document.querySelector(".bench-section").after(aiBenchDiv);
   }
-  aiBenchDiv.innerHTML = `<h4>🪑 ${currentOpponentName} Bench</h4><div class="bench-players">${aiBenchHtml}</div>`;
-
-  // Update bracket
+  aiBenchDiv.innerHTML=`<h4>🪑 ${currentOpponentName} Bench</h4><div class="bench-players">${aiBenchHtml}</div>`;
   updateBracket();
-
-  document.getElementById("revealBtn").style.display = "none";
-  document.getElementById("simBtn").style.display = "inline-block";
-  document.getElementById("simTitle").textContent = `${ROUND_NAMES[tournamentRound]}: You vs ${currentOpponentName}`;
+  document.getElementById("revealBtn").style.display="none";
+  document.getElementById("simBtn").style.display="inline-block";
+  document.getElementById("simTitle").textContent=`${ROUND_NAMES[tournamentRound]}: You vs ${currentOpponentName}`;
 }
 
-async function runSimulation() {
-  const btn = document.getElementById("simBtn");
-  btn.textContent = "⚽ Simulating...";
-  btn.disabled = true;
-
-  const yourStarters = yourSlots.filter(s => s.player).map(s => `${s.pos}: ${s.player.name}`);
-  const aiStarters = currentAiSlots.filter(s => s.player).map(s => `${s.pos}: ${s.player.name}`);
-
-  try {
-    const res = await fetch("/simulate", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        your_formation: document.getElementById("yourFormation").value,
-        ai_formation: currentAiFormation,
-        your_starters: yourStarters,
-        ai_starters: aiStarters,
-        your_team_name: "Your Team",
-        ai_team_name: currentOpponentName,
+async function runSimulation(){
+  const btn=document.getElementById("simBtn");
+  btn.textContent="⚽ Simulating...";btn.disabled=true;
+  const yourStarters=yourSlots.filter(s=>s.player).map(s=>`${s.pos}: ${s.player.name}`);
+  const aiStarters=currentAiSlots.filter(s=>s.player).map(s=>`${s.pos}: ${s.player.name}`);
+  try{
+    const res=await fetch("/simulate",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        your_formation:document.getElementById("yourFormation").value,
+        ai_formation:currentAiFormation,
+        your_starters:yourStarters,ai_starters:aiStarters,
+        your_team_name:"Your Team",ai_team_name:currentOpponentName,
       })
     });
-    const data = await res.json();
-    const result = data.result || "";
-    document.getElementById("matchResultText").textContent = result;
-    document.getElementById("matchResultBox").style.display = "block";
-
-    // Parse winner
-    const winnerLine = result.split("\n").find(l => l.toUpperCase().includes("WINNER:")) || "";
-    const youWon = winnerLine.toLowerCase().includes("your team");
-    const isDraw = winnerLine.toLowerCase().includes("draw");
-
-    // Parse score
-    const scoreLine = result.split("\n").find(l => l.toUpperCase().includes("RESULT:")) || "";
-    const scoreMatch = scoreLine.match(/(\d+)\s*-\s*(\d+)/);
-    const score = scoreMatch ? `${scoreMatch[1]}-${scoreMatch[2]}` : "?-?";
-
-    tournamentResults.push({
-      round: tournamentRound,
-      opponent: currentOpponentName,
-      score,
-      won: youWon && !isDraw
-    });
-
+    const data=await res.json();
+    const result=data.result||"";
+    document.getElementById("matchResultText").textContent=result;
+    document.getElementById("matchResultBox").style.display="block";
+    const winnerLine=result.split("\n").find(l=>l.toUpperCase().includes("WINNER:"))||"";
+    const youWon=winnerLine.toLowerCase().includes("your team");
+    const isDraw=winnerLine.toLowerCase().includes("draw");
+    const scoreLine=result.split("\n").find(l=>l.toUpperCase().includes("RESULT:"))||"";
+    const scoreMatch=scoreLine.match(/(\d+)\s*-\s*(\d+)/);
+    const score=scoreMatch?`${scoreMatch[1]}-${scoreMatch[2]}`:"?-?";
+    tournamentResults.push({round:tournamentRound,opponent:currentOpponentName,score,won:youWon&&!isDraw});
     updateBracket();
-
-    const nextArea = document.getElementById("nextMatchArea");
-    if (!youWon || isDraw) {
-      // Eliminated
-      setTimeout(() => {
-        document.getElementById("eliminatedBox").style.display = "block";
-        document.getElementById("eliminatedText").textContent =
-          `You were knocked out in the ${ROUND_NAMES[tournamentRound]} by ${currentOpponentName} (${score}). Better luck next time!`;
-      }, 500);
-      nextArea.innerHTML = "";
-    } else if (tournamentRound >= 2) {
-      // Champion!
-      setTimeout(() => {
-        document.getElementById("championBox").style.display = "block";
-        document.getElementById("championText").textContent =
-          `You beat ${currentOpponentName} in the Final (${score}) to become the ultimate champion! 🏆`;
-      }, 500);
-      nextArea.innerHTML = "";
-    } else {
-      // Next round
+    const nextArea=document.getElementById("nextMatchArea");
+    if(!youWon||isDraw){
+      setTimeout(()=>{
+        document.getElementById("eliminatedBox").style.display="block";
+        document.getElementById("eliminatedText").textContent=`You were knocked out in the ${ROUND_NAMES[tournamentRound]} by ${currentOpponentName} (${score}). Better luck next time!`;
+      },500);
+      nextArea.innerHTML="";
+    }else if(tournamentRound>=2){
+      setTimeout(()=>{
+        document.getElementById("championBox").style.display="block";
+        document.getElementById("championText").textContent=`You beat ${currentOpponentName} in the Final (${score}) to become the ultimate champion! 🏆`;
+      },500);
+      nextArea.innerHTML="";
+    }else{
       tournamentRound++;
-      nextArea.innerHTML = `<button class="next-btn" onclick="nextRound()">➡️ Next: ${ROUND_NAMES[tournamentRound]}</button>`;
+      nextArea.innerHTML=`<button class="next-btn" onclick="nextRound()">➡️ Next: ${ROUND_NAMES[tournamentRound]}</button>`;
     }
-  } catch(e) {
-    document.getElementById("matchResultText").textContent = "Something went wrong. Please try again.";
-    document.getElementById("matchResultBox").style.display = "block";
+  }catch(e){
+    document.getElementById("matchResultText").textContent="Something went wrong. Please try again.";
+    document.getElementById("matchResultBox").style.display="block";
   }
-  btn.textContent = "⚽ Simulate Match!";
-  btn.disabled = false;
+  btn.textContent="⚽ Simulate Match!";btn.disabled=false;
 }
 
-function nextRound() {
-  // Reset for next match
-  document.getElementById("matchResultBox").style.display = "none";
-  document.getElementById("simBtn").style.display = "none";
-  document.getElementById("revealBtn").style.display = "inline-block";
-  document.getElementById("revealBtn").textContent = "👁️ Reveal Next Opponent";
-  document.getElementById("aiPitchCol").style.display = "none";
-  const aiBenchSec = document.getElementById("aiBenchSection");
-  if (aiBenchSec) aiBenchSec.remove();
-  document.getElementById("simTitle").textContent = `${ROUND_NAMES[tournamentRound]}`;
-  document.getElementById("simSubtitle").textContent = `Reveal your next opponent!`;
+function nextRound(){
+  document.getElementById("matchResultBox").style.display="none";
+  document.getElementById("simBtn").style.display="none";
+  document.getElementById("revealBtn").style.display="inline-block";
+  document.getElementById("revealBtn").textContent="👁️ Reveal Next Opponent";
+  document.getElementById("aiPitchCol").style.display="none";
+  const ab=document.getElementById("aiBenchSection");if(ab)ab.remove();
+  document.getElementById("simTitle").textContent=`${ROUND_NAMES[tournamentRound]}`;
+  document.getElementById("simSubtitle").textContent="Reveal your next opponent!";
 }
 
-function updateBracket() {
-  document.getElementById("bracketWrap").style.display = "block";
-  const bracket = document.getElementById("bracketDisplay");
-  bracket.innerHTML = "";
-
-  const rounds = ["Quarter Final", "Semi Final", "Final"];
-
-  rounds.forEach((rName, ri) => {
-    const roundDiv = document.createElement("div");
-    roundDiv.className = "bracket-round";
-
-    const titleDiv = document.createElement("div");
-    titleDiv.className = "bracket-round-title";
-    titleDiv.textContent = rName;
+function updateBracket(){
+  document.getElementById("bracketWrap").style.display="block";
+  const bracket=document.getElementById("bracketDisplay");
+  bracket.innerHTML="";
+  ROUND_NAMES.forEach((rName,ri)=>{
+    const roundDiv=document.createElement("div");
+    roundDiv.className="bracket-round";
+    const titleDiv=document.createElement("div");
+    titleDiv.className="bracket-round-title";
+    titleDiv.textContent=rName;
     roundDiv.appendChild(titleDiv);
-
-    const matchDiv = document.createElement("div");
-    matchDiv.className = "bracket-match";
-
-    const result = tournamentResults.find(r => r.round === ri);
-    const isCurrent = ri === tournamentRound && !result;
-    const isPast = !!result;
-
-    // Your team row
-    const yourRow = document.createElement("div");
-    yourRow.className = "bracket-team you" + (isPast && result.won ? " winner" : "") + (isPast && !result.won ? " loser" : "");
-    yourRow.innerHTML = `Your Team ${isPast ? `<span class="bracket-score">${result.score.split("-")[0]}</span>` : ""}`;
-
-    // Opponent row
-    const opponentName = result ? result.opponent : (isCurrent ? currentOpponentName || "?" : "TBD");
-    const opRow = document.createElement("div");
-    opRow.className = "bracket-team" + (isPast && !result.won ? " winner" : "") + (isPast && result.won ? " loser" : "") + (!isPast && !isCurrent ? " tbd" : "");
-    opRow.innerHTML = `${opponentName} ${isPast ? `<span class="bracket-score">${result.score.split("-")[1]}</span>` : ""}`;
-
-    matchDiv.appendChild(yourRow);
-    matchDiv.appendChild(opRow);
-    roundDiv.appendChild(matchDiv);
-    bracket.appendChild(roundDiv);
-
-    // Connector lines between rounds
-    if (ri < 2) {
-      const connector = document.createElement("div");
-      connector.className = "bracket-connector";
-      connector.innerHTML = `<div class="connector-line"></div><div class="connector-line"></div>`;
+    const matchDiv=document.createElement("div");
+    matchDiv.className="bracket-match";
+    const result=tournamentResults.find(r=>r.round===ri);
+    const isCurrent=ri===tournamentRound&&!result;
+    const isPast=!!result;
+    const yourRow=document.createElement("div");
+    yourRow.className="bracket-team you"+(isPast&&result.won?" winner":"")+(isPast&&!result.won?" loser":"");
+    yourRow.innerHTML=`Your Team ${isPast?`<span class="bracket-score">${result.score.split("-")[0]}</span>`:""}`;
+    const opponentName=result?result.opponent:(isCurrent?currentOpponentName||"?":"TBD");
+    const opRow=document.createElement("div");
+    opRow.className="bracket-team"+(isPast&&!result.won?" winner":"")+(isPast&&result.won?" loser":"")+(!isPast&&!isCurrent?" tbd":"");
+    opRow.innerHTML=`${opponentName} ${isPast?`<span class="bracket-score">${result.score.split("-")[1]}</span>`:""}`;
+    matchDiv.appendChild(yourRow);matchDiv.appendChild(opRow);
+    roundDiv.appendChild(matchDiv);bracket.appendChild(roundDiv);
+    if(ri<2){
+      const connector=document.createElement("div");
+      connector.className="bracket-connector";
+      connector.innerHTML=`<div class="connector-top"></div><div class="connector-bottom"></div>`;
       bracket.appendChild(connector);
     }
   });
 }
 
-function fullReset() { initDraft(); }
+function fullReset(){initDraft();}
 
-// ── CHAT ──
-const chatBox = document.getElementById("chatBox");
-const userInput = document.getElementById("userInput");
-const sendBtn = document.getElementById("sendBtn");
-const counter = document.getElementById("counter");
-userInput.addEventListener("keypress", e => { if(e.key==="Enter") sendMessage(); });
+const chatBox=document.getElementById("chatBox");
+const userInput=document.getElementById("userInput");
+const sendBtn=document.getElementById("sendBtn");
+const counter=document.getElementById("counter");
+userInput.addEventListener("keypress",e=>{if(e.key==="Enter")sendMessage();});
 
-function updateCounter(r) {
-  counter.textContent = r + " questions left today";
-  counter.className = "counter";
-  if(r<=3) counter.className="counter low";
-  if(r===0) counter.className="counter empty";
+function updateCounter(r){
+  counter.textContent=r+" questions left today";
+  counter.className="counter";
+  if(r<=3)counter.className="counter low";
+  if(r===0)counter.className="counter empty";
 }
-function addMessage(text,role) {
+function addMessage(text,role){
   const d=document.createElement("div");
-  d.className="message "+role; d.textContent=text;
-  chatBox.appendChild(d); chatBox.scrollTop=chatBox.scrollHeight;
+  d.className="message "+role;d.textContent=text;
+  chatBox.appendChild(d);chatBox.scrollTop=chatBox.scrollHeight;
 }
-function addTyping() {
+function addTyping(){
   const d=document.createElement("div");
-  d.className="typing"; d.id="typing"; d.textContent="FootballGPT is thinking...";
-  chatBox.appendChild(d); chatBox.scrollTop=chatBox.scrollHeight;
+  d.className="typing";d.id="typing";d.textContent="FootballGPT is thinking...";
+  chatBox.appendChild(d);chatBox.scrollTop=chatBox.scrollHeight;
 }
 function removeTyping(){const t=document.getElementById("typing");if(t)t.remove();}
 
-async function sendMessage() {
-  const msg=userInput.value.trim(); if(!msg) return;
-  userInput.value=""; sendBtn.disabled=true;
-  addMessage(msg,"user"); addTyping();
-  try {
+async function sendMessage(){
+  const msg=userInput.value.trim();if(!msg)return;
+  userInput.value="";sendBtn.disabled=true;
+  addMessage(msg,"user");addTyping();
+  try{
     const res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:msg})});
-    const data=await res.json(); removeTyping();
+    const data=await res.json();removeTyping();
     if(data.error==="limit_reached"){addMessage("⛔ "+data.message,"agent");updateCounter(0);userInput.disabled=true;sendBtn.disabled=true;return;}
     if(data.error==="service_unavailable"){addMessage(data.message,"agent");sendBtn.disabled=false;return;}
-    addMessage(data.response,"agent"); updateCounter(data.remaining);
-  } catch(e){removeTyping();addMessage("⚽ Something went wrong. Please try again!","agent");}
-  sendBtn.disabled=false; userInput.focus();
+    addMessage(data.response,"agent");updateCounter(data.remaining);
+  }catch(e){removeTyping();addMessage("⚽ Something went wrong. Please try again!","agent");}
+  sendBtn.disabled=false;userInput.focus();
 }
 
-function showPage(page,btn) {
+function showPage(page,btn){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
   document.getElementById("page-"+page).classList.add("active");
   btn.classList.add("active");
-  if(page==="draft"&&yourSlots.length===0) initDraft();
+  if(page==="draft"&&yourSlots.length===0)initDraft();
 }
 </script>
 </body>
