@@ -6,9 +6,7 @@
 <title>FootballGPT</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0a0a0a; font-family: 'Segoe UI', sans-serif; height: 100vh; display: flex; flex-direction: column; }
-
-  /* NAVBAR */
+  body { background: #0a0a0a; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
   .navbar { background: #1a1a2e; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; height: 56px; flex-shrink: 0; }
   .navbar h1 { color: #4ade80; font-size: 1.2rem; }
   .nav-links { display: flex; gap: 8px; }
@@ -18,78 +16,95 @@
   .counter { background: #0f3460; padding: 5px 12px; border-radius: 20px; font-size: 0.78rem; color: #4ade80; font-weight: bold; }
   .counter.low { color: #ff9800; background: #2a1a00; }
   .counter.empty { color: #f44336; background: #2a0000; }
-
-  /* PAGES */
-  .page { display: none; flex: 1; overflow-y: auto; flex-direction: column; }
+  .page { display: none; flex: 1; flex-direction: column; }
   .page.active { display: flex; }
 
-  /* CHAT PAGE */
-  .chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  /* CHAT */
+  .chat-box { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; min-height: 400px; }
   .message { max-width: 75%; padding: 12px 16px; border-radius: 16px; line-height: 1.6; font-size: 0.88rem; }
   .user { background: #4ade80; color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
   .agent { background: #1e1e2e; color: #e0e0e0; align-self: flex-start; border-bottom-left-radius: 4px; white-space: pre-wrap; }
   .typing { color: #666; font-style: italic; font-size: 0.82rem; align-self: flex-start; padding: 8px 16px; }
-  .input-area { padding: 14px 20px; background: #111; border-top: 1px solid #333; display: flex; gap: 10px; flex-shrink: 0; }
+  .input-area { padding: 14px 20px; background: #111; border-top: 1px solid #333; display: flex; gap: 10px; }
   .input-area input { flex: 1; background: #1e1e2e; border: 1px solid #333; border-radius: 24px; padding: 11px 18px; color: #fff; font-size: 0.88rem; outline: none; }
   .input-area input:focus { border-color: #4ade80; }
-  .input-area button { background: #4ade80; color: #000; border: none; border-radius: 24px; padding: 11px 22px; font-weight: bold; cursor: pointer; font-size: 0.88rem; }
+  .input-area button { background: #4ade80; color: #000; border: none; border-radius: 24px; padding: 11px 22px; font-weight: bold; cursor: pointer; }
   .input-area button:hover { background: #22c55e; }
   .input-area button:disabled { background: #333; color: #666; cursor: not-allowed; }
 
-  /* DRAFT PAGE */
-  .draft-page { padding: 24px; flex: 1; overflow-y: auto; }
-  .draft-header { text-align: center; margin-bottom: 24px; }
-  .draft-header h2 { color: #4ade80; font-size: 1.4rem; margin-bottom: 6px; }
-  .draft-header p { color: #aaa; font-size: 0.85rem; }
-  .draft-status { display: flex; gap: 16px; margin-bottom: 24px; }
-  .team-box { flex: 1; background: #1e1e2e; border-radius: 12px; padding: 16px; border: 1px solid #333; }
-  .team-box h3 { font-size: 0.9rem; margin-bottom: 10px; }
-  .team-box.yours h3 { color: #4ade80; }
-  .team-box.ai h3 { color: #f44336; }
-  .team-list { display: flex; flex-wrap: wrap; gap: 6px; min-height: 40px; }
-  .player-tag { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
-  .player-tag.yours { background: #1a3a1a; color: #4ade80; border: 1px solid #4ade80; }
-  .player-tag.ai { background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
-  .pick-section { background: #16213e; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #0f3460; }
-  .pick-section h3 { color: #fff; font-size: 1rem; margin-bottom: 6px; }
-  .pick-section p { color: #aaa; font-size: 0.82rem; margin-bottom: 16px; }
-  .players-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-  .player-card { background: #1e1e2e; border: 2px solid #333; border-radius: 10px; padding: 14px 8px; text-align: center; cursor: pointer; transition: all 0.2s; }
+  /* DRAFT */
+  .draft-wrap { padding: 20px; overflow-y: auto; flex: 1; }
+  .draft-header { text-align: center; margin-bottom: 16px; }
+  .draft-header h2 { color: #4ade80; font-size: 1.3rem; }
+  .draft-header p { color: #aaa; font-size: 0.82rem; margin-top: 4px; }
+
+  /* FORMATION SELECTOR */
+  .formation-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; background: #16213e; padding: 12px 16px; border-radius: 10px; flex-wrap: wrap; }
+  .formation-bar label { color: #aaa; font-size: 0.82rem; }
+  .formation-select { background: #1e1e2e; border: 1px solid #4ade80; color: #4ade80; padding: 6px 12px; border-radius: 8px; font-size: 0.82rem; cursor: pointer; }
+
+  /* PITCH */
+  .pitch-area { display: flex; gap: 16px; margin-bottom: 16px; }
+  .pitch-container { flex: 1; }
+  .pitch-container h3 { font-size: 0.85rem; margin-bottom: 8px; text-align: center; }
+  .pitch-container.yours h3 { color: #4ade80; }
+  .pitch-container.ai-pitch h3 { color: #f44336; }
+  .pitch { background: #1a3a1a; border: 2px solid #2d5a2d; border-radius: 8px; position: relative; width: 100%; aspect-ratio: 0.65; overflow: hidden; }
+  .pitch-lines { position: absolute; inset: 0; pointer-events: none; }
+  .position-slot { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; z-index: 2; }
+  .position-slot .slot-circle { width: 36px; height: 36px; border-radius: 50%; border: 2px solid #4ade80; background: #0a0a0a; display: flex; align-items: center; justify-content: center; margin: 0 auto 2px; font-size: 0.6rem; font-weight: bold; color: #4ade80; transition: all 0.2s; overflow: hidden; }
+  .position-slot.filled .slot-circle { background: #4ade80; color: #000; border-color: #22c55e; }
+  .position-slot.ai-slot .slot-circle { border-color: #f44336; color: #f44336; }
+  .position-slot.ai-slot.filled .slot-circle { background: #f44336; color: #fff; border-color: #c62828; }
+  .position-slot .slot-label { font-size: 0.55rem; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 50px; }
+  .bench-row { background: #111; border: 1px solid #333; border-radius: 8px; padding: 8px; margin-bottom: 12px; }
+  .bench-row h4 { color: #aaa; font-size: 0.75rem; margin-bottom: 6px; }
+  .bench-players { display: flex; flex-wrap: wrap; gap: 4px; }
+  .bench-tag { padding: 3px 8px; border-radius: 12px; font-size: 0.7rem; }
+  .bench-tag.yours { background: #1a3a1a; color: #4ade80; border: 1px solid #4ade80; }
+  .bench-tag.ai { background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
+
+  /* PICK SECTION */
+  .draft-turn-bar { background: #0f3460; border-radius: 8px; padding: 8px 16px; text-align: center; margin-bottom: 12px; font-size: 0.82rem; color: #93c5fd; }
+  .ai-pick-banner { background: #1a1a3e; border: 1px solid #3a3a7e; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; display: none; }
+  .ai-pick-banner p { color: #9090ff; font-size: 0.82rem; }
+  .pick-section { background: #16213e; border-radius: 10px; padding: 16px; border: 1px solid #0f3460; margin-bottom: 16px; }
+  .pick-section h3 { color: #fff; font-size: 0.9rem; margin-bottom: 4px; }
+  .pick-section p { color: #aaa; font-size: 0.78rem; margin-bottom: 12px; }
+  .players-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .player-card { background: #1e1e2e; border: 2px solid #333; border-radius: 8px; padding: 10px 6px; text-align: center; cursor: pointer; transition: all 0.2s; }
   .player-card:hover { border-color: #4ade80; transform: translateY(-2px); background: #1a3a1a; }
-  .player-card .name { color: #fff; font-size: 0.78rem; font-weight: bold; margin-bottom: 4px; }
-  .player-card .pos { color: #4ade80; font-size: 0.7rem; }
-  .player-card .era { color: #666; font-size: 0.65rem; margin-top: 2px; }
-  .player-card.picked { opacity: 0.3; pointer-events: none; border-color: #222; }
-  .ai-pick-banner { background: #1a1a3e; border: 1px solid #3a3a7e; border-radius: 10px; padding: 14px; margin-bottom: 16px; display: none; }
-  .ai-pick-banner p { color: #9090ff; font-size: 0.85rem; }
-  .ai-pick-banner strong { color: #fff; }
+  .player-card .p-name { color: #fff; font-size: 0.72rem; font-weight: bold; margin-bottom: 2px; }
+  .player-card .p-pos { color: #4ade80; font-size: 0.65rem; }
+  .player-card .p-era { color: #555; font-size: 0.6rem; margin-top: 2px; }
+  .player-card .p-nat { font-size: 0.7rem; }
+
+  /* SIM */
   .sim-section { text-align: center; padding: 20px; display: none; }
-  .sim-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 30px; padding: 16px 40px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
-  .sim-btn:hover { transform: scale(1.04); }
-  .sim-result { background: #16213e; border-radius: 12px; padding: 20px; text-align: left; border: 1px solid #4ade80; display: none; }
-  .sim-result h3 { color: #4ade80; margin-bottom: 12px; font-size: 1rem; }
-  .sim-result pre { color: #e0e0e0; font-size: 0.83rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.6; }
-  .reset-btn { background: #333; color: #aaa; border: none; border-radius: 20px; padding: 10px 24px; cursor: pointer; font-size: 0.85rem; margin-top: 14px; }
+  .sim-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; border: none; border-radius: 30px; padding: 14px 36px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-bottom: 16px; }
+  .sim-btn:hover { transform: scale(1.03); }
+  .sim-result { background: #16213e; border-radius: 12px; padding: 20px; text-align: left; border: 1px solid #4ade80; display: none; margin-top: 16px; }
+  .sim-result h3 { color: #4ade80; margin-bottom: 12px; }
+  .sim-result pre { color: #e0e0e0; font-size: 0.83rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.7; }
+  .reset-btn { background: #333; color: #aaa; border: none; border-radius: 20px; padding: 9px 22px; cursor: pointer; font-size: 0.82rem; margin-top: 14px; }
   .reset-btn:hover { background: #444; color: #fff; }
-  .draft-turn { background: #0f3460; border-radius: 8px; padding: 8px 16px; display: inline-block; margin-bottom: 16px; font-size: 0.82rem; color: #93c5fd; }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
   <h1>⚽ FootballGPT</h1>
   <div class="nav-links">
-    <button class="nav-btn active" onclick="showPage('chat')">💬 Chat</button>
-    <button class="nav-btn" onclick="showPage('draft')">🏆 Draft Mode</button>
+    <button class="nav-btn active" onclick="showPage('chat', this)">💬 Chat</button>
+    <button class="nav-btn" onclick="showPage('draft', this)">🏆 Draft Mode</button>
   </div>
   <div class="counter" id="counter">10 questions left today</div>
 </div>
 
 <!-- CHAT PAGE -->
-<div class="page active" id="page-chat" style="flex-direction: column;">
+<div class="page active" id="page-chat">
   <div class="chat-box" id="chatBox">
-    <div class="message agent">👋 Welcome to FootballGPT! You have 10 free questions today.<br><br>Try asking:<br>• "Who was better, Pele or Maradona?"<br>• "Compare 1999 Man Utd vs 2009 Barcelona"<br>• "Who had the better prime — Henry or Ronaldo 9?"</div>
+    <div class="message agent">👋 Welcome to FootballGPT! You have 10 free questions today.<br><br>Try:<br>• "Who was better, Pele or Maradona?"<br>• "Compare 1999 Man Utd vs 2009 Barcelona"<br>• "Who had the better prime — Henry or Ronaldo 9?"</div>
   </div>
   <div class="input-area">
     <input type="text" id="userInput" placeholder="Ask a football question..." />
@@ -99,38 +114,83 @@
 
 <!-- DRAFT PAGE -->
 <div class="page" id="page-draft">
-  <div class="draft-page">
+  <div class="draft-wrap">
     <div class="draft-header">
       <h2>🏆 Draft Mode</h2>
-      <p>Pick from 5 random legends — build your squad of 20. Then simulate the match against the AI!</p>
+      <p>Pick from 5 random legends — fill your formation — then simulate the match!</p>
     </div>
 
-    <div class="draft-status">
-      <div class="team-box yours">
-        <h3>👤 Your Team (<span id="yourCount">0</span>/20)</h3>
-        <div class="team-list" id="yourTeam"></div>
+    <div class="formation-bar">
+      <label>Your Formation:</label>
+      <select class="formation-select" id="yourFormation" onchange="changeFormation()">
+        <option value="4-3-3">4-3-3</option>
+        <option value="4-4-2">4-4-2</option>
+        <option value="4-2-3-1">4-2-3-1</option>
+        <option value="3-5-2">3-5-2</option>
+        <option value="4-1-4-1">4-1-4-1</option>
+      </select>
+      <span style="color:#555; font-size:0.8rem;">|</span>
+      <label>AI Formation:</label>
+      <select class="formation-select" id="aiFormation" style="border-color:#f44336; color:#f44336;">
+        <option value="4-3-3">4-3-3</option>
+        <option value="4-4-2">4-4-2</option>
+        <option value="4-2-3-1">4-2-3-1</option>
+        <option value="3-5-2">3-5-2</option>
+        <option value="4-1-4-1">4-1-4-1</option>
+      </select>
+    </div>
+
+    <div class="pitch-area">
+      <div class="pitch-container yours">
+        <h3>👤 Your Team</h3>
+        <div class="pitch" id="yourPitch">
+          <svg class="pitch-lines" viewBox="0 0 100 154" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="98" height="152" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <line x1="1" y1="77" x2="99" y2="77" stroke="#2d5a2d" stroke-width="0.5"/>
+            <circle cx="50" cy="77" r="12" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="25" y="1" width="50" height="20" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="25" y="133" width="50" height="20" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="35" y="1" width="30" height="10" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="35" y="143" width="30" height="10" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="bench-row">
+          <h4>🪑 Bench (<span id="yourBenchCount">0</span>)</h4>
+          <div class="bench-players" id="yourBench"></div>
+        </div>
       </div>
-      <div class="team-box ai">
-        <h3>🤖 AI Team (<span id="aiCount">0</span>/20)</h3>
-        <div class="team-list" id="aiTeam"></div>
+      <div class="pitch-container ai-pitch">
+        <h3>🤖 AI Team</h3>
+        <div class="pitch" id="aiPitch">
+          <svg class="pitch-lines" viewBox="0 0 100 154" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="98" height="152" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <line x1="1" y1="77" x2="99" y2="77" stroke="#2d5a2d" stroke-width="0.5"/>
+            <circle cx="50" cy="77" r="12" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="25" y="1" width="50" height="20" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="25" y="133" width="50" height="20" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="35" y="1" width="30" height="10" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+            <rect x="35" y="143" width="30" height="10" fill="none" stroke="#2d5a2d" stroke-width="0.5"/>
+          </svg>
+        </div>
+        <div class="bench-row">
+          <h4>🪑 Bench (<span id="aiBenchCount">0</span>)</h4>
+          <div class="bench-players" id="aiBench"></div>
+        </div>
       </div>
     </div>
 
-    <div id="draftTurn" class="draft-turn">🟢 Your pick — choose a player!</div>
-
-    <div class="ai-pick-banner" id="aiPickBanner">
-      <p>🤖 AI picked: <strong id="aiPickName"></strong></p>
-    </div>
+    <div class="draft-turn-bar" id="draftTurnBar">🟢 Your pick — choose a player!</div>
+    <div class="ai-pick-banner" id="aiPickBanner"><p>🤖 AI picked: <strong id="aiPickName"></strong></p></div>
 
     <div class="pick-section" id="pickSection">
       <h3>Choose your player</h3>
-      <p>Pick 1 from the 5 options below</p>
+      <p>Pick 1 from the 5 options — they'll fill the next available position</p>
       <div class="players-grid" id="playersGrid"></div>
     </div>
 
     <div class="sim-section" id="simSection">
       <h2 style="color:#4ade80; margin-bottom:8px;">🏆 Both squads are full!</h2>
-      <p style="color:#aaa; margin-bottom:20px; font-size:0.85rem;">Ready to simulate the match?</p>
+      <p style="color:#aaa; font-size:0.85rem; margin-bottom:16px;">Ready to simulate the match?</p>
       <button class="sim-btn" onclick="simulateMatch()">⚽ Simulate Match!</button>
       <div class="sim-result" id="simResult">
         <h3>⚽ Match Result</h3>
@@ -142,226 +202,450 @@
 </div>
 
 <script>
-  // ── PLAYER POOL ──
-  const ALL_PLAYERS = [
-    {name:"Pelé",pos:"ST",era:"1958–1977"},{name:"Maradona",pos:"AM",era:"1976–1997"},
-    {name:"Messi",pos:"AM",era:"2004–present"},{name:"Ronaldo (CR7)",pos:"ST",era:"2002–present"},
-    {name:"Ronaldo R9",pos:"ST",era:"1993–2011"},{name:"Zidane",pos:"AM",era:"1988–2006"},
-    {name:"Ronaldinho",pos:"AM",era:"1998–2015"},{name:"Henry",pos:"ST",era:"1994–2012"},
-    {name:"Van Basten",pos:"ST",era:"1981–1995"},{name:"Cruyff",pos:"AM",era:"1964–1984"},
-    {name:"Beckenbauer",pos:"CB",era:"1964–1983"},{name:"Platini",pos:"AM",era:"1972–1987"},
-    {name:"Di Stefano",pos:"ST",era:"1945–1966"},{name:"Eusebio",pos:"ST",era:"1957–1979"},
-    {name:"Puskas",pos:"ST",era:"1943–1966"},{name:"Best",pos:"RW",era:"1963–1983"},
-    {name:"Charlton",pos:"CM",era:"1956–1975"},{name:"Moore",pos:"CB",era:"1958–1977"},
-    {name:"Buffon",pos:"GK",era:"1995–present"},{name:"Yashin",pos:"GK",era:"1950–1970"},
-    {name:"Maldini",pos:"LB",era:"1985–2009"},{name:"Cafu",pos:"RB",era:"1988–2008"},
-    {name:"Xavi",pos:"CM",era:"1998–2019"},{name:"Iniesta",pos:"CM",era:"2002–2023"},
-    {name:"Pirlo",pos:"CM",era:"1995–2017"},{name:"Seedorf",pos:"CM",era:"1992–2014"},
-    {name:"Kaka",pos:"AM",era:"2001–2017"},{name:"Shevchenko",pos:"ST",era:"1994–2012"},
-    {name:"Ibrahimovic",pos:"ST",era:"1999–present"},{name:"Suarez",pos:"ST",era:"2005–present"},
-    {name:"Neymar",pos:"LW",era:"2009–present"},{name:"Mbappe",pos:"ST",era:"2015–present"},
-    {name:"Hazard",pos:"LW",era:"2007–present"},{name:"Robben",pos:"RW",era:"2000–2019"},
-    {name:"Ribery",pos:"LW",era:"1999–2021"},{name:"Nedved",pos:"LM",era:"1991–2009"},
-    {name:"Gerrard",pos:"CM",era:"1998–2016"},{name:"Lampard",pos:"CM",era:"1995–2015"},
-    {name:"Scholes",pos:"CM",era:"1993–2013"},{name:"Vieira",pos:"CM",era:"1993–2011"},
-    {name:"Desailly",pos:"CB",era:"1986–2006"},{name:"Cannavaro",pos:"CB",era:"1993–2011"},
-    {name:"Nesta",pos:"CB",era:"1993–2013"},{name:"Ferdinand",pos:"CB",era:"1997–2015"},
-    {name:"Terry",pos:"CB",era:"1998–2018"},{name:"Roberto Carlos",pos:"LB",era:"1991–2011"},
-    {name:"Lahm",pos:"RB",era:"2002–2017"},{name:"Dani Alves",pos:"RB",era:"2001–2023"},
-    {name:"Casillas",pos:"GK",era:"1999–2020"},{name:"Neuer",pos:"GK",era:"2005–present"},
-  ];
+// ── FORMATIONS ──
+const FORMATIONS = {
+  "4-3-3": [
+    {pos:"GK", x:50, y:92},
+    {pos:"RB", x:80, y:78},{pos:"CB", x:62, y:74},{pos:"CB", x:38, y:74},{pos:"LB", x:20, y:78},
+    {pos:"CM", x:72, y:58},{pos:"CM", x:50, y:55},{pos:"CM", x:28, y:58},
+    {pos:"RW", x:80, y:36},{pos:"ST", x:50, y:28},{pos:"LW", x:20, y:36}
+  ],
+  "4-4-2": [
+    {pos:"GK", x:50, y:92},
+    {pos:"RB", x:80, y:78},{pos:"CB", x:62, y:74},{pos:"CB", x:38, y:74},{pos:"LB", x:20, y:78},
+    {pos:"RM", x:82, y:55},{pos:"CM", x:62, y:52},{pos:"CM", x:38, y:52},{pos:"LM", x:18, y:55},
+    {pos:"ST", x:62, y:28},{pos:"ST", x:38, y:28}
+  ],
+  "4-2-3-1": [
+    {pos:"GK", x:50, y:92},
+    {pos:"RB", x:80, y:78},{pos:"CB", x:62, y:74},{pos:"CB", x:38, y:74},{pos:"LB", x:20, y:78},
+    {pos:"CDM", x:62, y:60},{pos:"CDM", x:38, y:60},
+    {pos:"RAM", x:78, y:42},{pos:"CAM", x:50, y:40},{pos:"LAM", x:22, y:42},
+    {pos:"ST", x:50, y:24}
+  ],
+  "3-5-2": [
+    {pos:"GK", x:50, y:92},
+    {pos:"CB", x:68, y:76},{pos:"CB", x:50, y:74},{pos:"CB", x:32, y:76},
+    {pos:"RWB", x:86, y:58},{pos:"CM", x:68, y:54},{pos:"CM", x:50, y:52},{pos:"CM", x:32, y:54},{pos:"LWB", x:14, y:58},
+    {pos:"ST", x:62, y:28},{pos:"ST", x:38, y:28}
+  ],
+  "4-1-4-1": [
+    {pos:"GK", x:50, y:92},
+    {pos:"RB", x:80, y:78},{pos:"CB", x:62, y:74},{pos:"CB", x:38, y:74},{pos:"LB", x:20, y:78},
+    {pos:"CDM", x:50, y:63},
+    {pos:"RM", x:82, y:48},{pos:"CM", x:62, y:46},{pos:"CM", x:38, y:46},{pos:"LM", x:18, y:48},
+    {pos:"ST", x:50, y:26}
+  ]
+};
 
-  let availablePlayers = [];
-  let yourTeam = [];
-  let aiTeam = [];
-  let currentOptions = [];
-  let isYourTurn = true;
-  let draftComplete = false;
+// ── PLAYER POOL (120+ players) ──
+const ALL_PLAYERS = [
+  // GOALKEEPERS
+  {name:"Buffon",pos:"GK",era:"1995–2023",nat:"🇮🇹"},
+  {name:"Yashin",pos:"GK",era:"1950–1970",nat:"🇷🇺"},
+  {name:"Casillas",pos:"GK",era:"1999–2020",nat:"🇪🇸"},
+  {name:"Neuer",pos:"GK",era:"2005–present",nat:"🇩🇪"},
+  {name:"Schmeichel",pos:"GK",era:"1981–2003",nat:"🇩🇰"},
+  {name:"van der Sar",pos:"GK",era:"1990–2011",nat:"🇳🇱"},
+  {name:"Kahn",pos:"GK",era:"1987–2008",nat:"🇩🇪"},
+  {name:"Zoff",pos:"GK",era:"1961–1983",nat:"🇮🇹"},
+  {name:"Banks",pos:"GK",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Alisson",pos:"GK",era:"2010–present",nat:"🇧🇷"},
 
-  function initDraft() {
-    availablePlayers = [...ALL_PLAYERS].sort(() => Math.random() - 0.5);
-    yourTeam = []; aiTeam = [];
-    currentOptions = []; isYourTurn = true; draftComplete = false;
-    document.getElementById("yourTeam").innerHTML = "";
-    document.getElementById("aiTeam").innerHTML = "";
-    document.getElementById("yourCount").textContent = "0";
-    document.getElementById("aiCount").textContent = "0";
-    document.getElementById("aiPickBanner").style.display = "none";
-    document.getElementById("simSection").style.display = "none";
-    document.getElementById("simResult").style.display = "none";
-    document.getElementById("pickSection").style.display = "block";
-    document.getElementById("draftTurn").style.display = "inline-block";
-    document.getElementById("draftTurn").textContent = "🟢 Your pick — choose a player!";
-    showNextOptions();
-  }
+  // RIGHT BACKS
+  {name:"Cafu",pos:"RB",era:"1988–2008",nat:"🇧🇷"},
+  {name:"Dani Alves",pos:"RB",era:"2001–2023",nat:"🇧🇷"},
+  {name:"Lahm",pos:"RB",era:"2002–2017",nat:"🇩🇪"},
+  {name:"Zanetti",pos:"RB",era:"1991–2014",nat:"🇦🇷"},
+  {name:"Trent AA",pos:"RB",era:"2016–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Puyol",pos:"RB",era:"1999–2014",nat:"🇪🇸"},
 
-  function showNextOptions() {
-    currentOptions = availablePlayers.splice(0, 5);
-    const grid = document.getElementById("playersGrid");
-    grid.innerHTML = "";
-    currentOptions.forEach((p, i) => {
-      const card = document.createElement("div");
-      card.className = "player-card";
-      card.innerHTML = `<div class="name">${p.name}</div><div class="pos">${p.pos}</div><div class="era">${p.era}</div>`;
-      card.onclick = () => yourPick(i);
-      grid.appendChild(card);
-    });
-  }
+  // LEFT BACKS
+  {name:"Roberto Carlos",pos:"LB",era:"1991–2011",nat:"🇧🇷"},
+  {name:"Maldini",pos:"LB",era:"1985–2009",nat:"🇮🇹"},
+  {name:"Ashley Cole",pos:"LB",era:"1998–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Marcelo",pos:"LB",era:"2005–2023",nat:"🇧🇷"},
+  {name:"Guardiola (LB)",pos:"LB",era:"1990–2006",nat:"🇪🇸"},
+  {name:"Evra",pos:"LB",era:"1999–2019",nat:"🇫🇷"},
 
-  function yourPick(index) {
-    const picked = currentOptions[index];
-    yourTeam.push(picked.name);
-    updateTeamDisplay();
-    document.getElementById("draftTurn").textContent = "🤖 AI is picking...";
+  // CENTRE BACKS
+  {name:"Beckenbauer",pos:"CB",era:"1964–1983",nat:"🇩🇪"},
+  {name:"Cannavaro",pos:"CB",era:"1993–2011",nat:"🇮🇹"},
+  {name:"Nesta",pos:"CB",era:"1993–2013",nat:"🇮🇹"},
+  {name:"Ferdinand",pos:"CB",era:"1997–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Terry",pos:"CB",era:"1998–2018",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Moore",pos:"CB",era:"1958–1977",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Desailly",pos:"CB",era:"1986–2006",nat:"🇫🇷"},
+  {name:"Baresi",pos:"CB",era:"1977–1997",nat:"🇮🇹"},
+  {name:"Hummels",pos:"CB",era:"2007–present",nat:"🇩🇪"},
+  {name:"Sergio Ramos",pos:"CB",era:"2004–present",nat:"🇪🇸"},
+  {name:"Van Dijk",pos:"CB",era:"2011–present",nat:"🇳🇱"},
+  {name:"Kompany",pos:"CB",era:"2003–2020",nat:"🇧🇪"},
+  {name:"Adams",pos:"CB",era:"1983–2002",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Vidic",pos:"CB",era:"2000–2015",nat:"🇷🇸"},
 
-    // Remove picked from options, rest go back to pool
-    const remaining = currentOptions.filter((_, i) => i !== index);
-    availablePlayers = [...remaining, ...availablePlayers];
+  // DEFENSIVE MIDFIELDERS
+  {name:"Vieira",pos:"CDM",era:"1993–2011",nat:"🇫🇷"},
+  {name:"Makelele",pos:"CDM",era:"1991–2011",nat:"🇫🇷"},
+  {name:"Busquets",pos:"CDM",era:"2008–present",nat:"🇪🇸"},
+  {name:"Casemiro",pos:"CDM",era:"2010–present",nat:"🇧🇷"},
+  {name:"Kante",pos:"CDM",era:"2012–present",nat:"🇫🇷"},
+  {name:"Hargreaves",pos:"CDM",era:"1999–2012",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Gattuso",pos:"CDM",era:"1995–2013",nat:"🇮🇹"},
 
-    setTimeout(() => aiPick(), 800);
-  }
+  // CENTRAL MIDFIELDERS
+  {name:"Xavi",pos:"CM",era:"1998–2019",nat:"🇪🇸"},
+  {name:"Iniesta",pos:"CM",era:"2002–2023",nat:"🇪🇸"},
+  {name:"Pirlo",pos:"CM",era:"1995–2017",nat:"🇮🇹"},
+  {name:"Seedorf",pos:"CM",era:"1992–2014",nat:"🇳🇱"},
+  {name:"Scholes",pos:"CM",era:"1993–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Gerrard",pos:"CM",era:"1998–2016",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Lampard",pos:"CM",era:"1995–2015",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Charlton",pos:"CM",era:"1956–1975",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Platini",pos:"CM",era:"1972–1987",nat:"🇫🇷"},
+  {name:"Nedved",pos:"CM",era:"1991–2009",nat:"🇨🇿"},
+  {name:"Modric",pos:"CM",era:"2003–present",nat:"🇭🇷"},
+  {name:"De Bruyne",pos:"CM",era:"2008–present",nat:"🇧🇪"},
+  {name:"Fabregas",pos:"CM",era:"2003–2019",nat:"🇪🇸"},
+  {name:"Schweinsteiger",pos:"CM",era:"2002–2019",nat:"🇩🇪"},
+  {name:"Ballack",pos:"CM",era:"1995–2012",nat:"🇩🇪"},
+  {name:"Gullit",pos:"CM",era:"1979–1998",nat:"🇳🇱"},
 
-  function aiPick() {
-    // AI picks smartest available — just random for now but from remaining pool
-    const aiOptions = availablePlayers.splice(0, 5);
-    const aiChoice = aiOptions[Math.floor(Math.random() * aiOptions.length)];
-    aiTeam.push(aiChoice.name);
+  // ATTACKING MIDFIELDERS
+  {name:"Zidane",pos:"CAM",era:"1988–2006",nat:"🇫🇷"},
+  {name:"Cruyff",pos:"CAM",era:"1964–1984",nat:"🇳🇱"},
+  {name:"Ronaldinho",pos:"CAM",era:"1998–2015",nat:"🇧🇷"},
+  {name:"Kaka",pos:"CAM",era:"2001–2017",nat:"🇧🇷"},
+  {name:"Del Piero",pos:"CAM",era:"1991–2014",nat:"🇮🇹"},
+  {name:"Totti",pos:"CAM",era:"1992–2017",nat:"🇮🇹"},
+  {name:"Baggio",pos:"CAM",era:"1982–2004",nat:"🇮🇹"},
+  {name:"Riquelme",pos:"CAM",era:"1996–2015",nat:"🇦🇷"},
+  {name:"Bergkamp",pos:"CAM",era:"1989–2006",nat:"🇳🇱"},
+  {name:"Savicevic",pos:"CAM",era:"1984–2001",nat:"🇷🇸"},
+  {name:"Maradona",pos:"CAM",era:"1976–1997",nat:"🇦🇷"},
+  {name:"Messi",pos:"CAM",era:"2004–present",nat:"🇦🇷"},
 
-    // Rest go back
-    const leftover = aiOptions.filter(p => p.name !== aiChoice.name);
-    availablePlayers = [...leftover, ...availablePlayers];
+  // WINGERS
+  {name:"Best",pos:"RW",era:"1963–1983",nat:"🇬🇧"},
+  {name:"Robben",pos:"RW",era:"2000–2019",nat:"🇳🇱"},
+  {name:"Salah",pos:"RW",era:"2010–present",nat:"🇪🇬"},
+  {name:"Beckham",pos:"RW",era:"1992–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Di Maria",pos:"RW",era:"2005–2024",nat:"🇦🇷"},
+  {name:"Ribery",pos:"LW",era:"1999–2021",nat:"🇫🇷"},
+  {name:"Hazard",pos:"LW",era:"2007–2023",nat:"🇧🇪"},
+  {name:"Neymar",pos:"LW",era:"2009–present",nat:"🇧🇷"},
+  {name:"Figo",pos:"RW",era:"1990–2009",nat:"🇵🇹"},
+  {name:"Giggs",pos:"LW",era:"1990–2014",nat:"🏴󠁧󠁢󠁷󠁬󠁳󠁿"},
+  {name:"Mane",pos:"LW",era:"2011–present",nat:"🇸🇳"},
+  {name:"Bale",pos:"RW",era:"2006–2023",nat:"🏴󠁧󠁢󠁷󠁬󠁳󠁿"},
+  {name:"Overmars",pos:"LW",era:"1990–2004",nat:"🇳🇱"},
+  {name:"Larsson",pos:"LW",era:"1988–2009",nat:"🇸🇪"},
 
-    document.getElementById("aiPickName").textContent = aiChoice.name;
-    document.getElementById("aiPickBanner").style.display = "block";
-    updateTeamDisplay();
+  // STRIKERS
+  {name:"Pelé",pos:"ST",era:"1956–1977",nat:"🇧🇷"},
+  {name:"Ronaldo R9",pos:"ST",era:"1993–2011",nat:"🇧🇷"},
+  {name:"Ronaldo CR7",pos:"ST",era:"2002–present",nat:"🇵🇹"},
+  {name:"Henry",pos:"ST",era:"1994–2012",nat:"🇫🇷"},
+  {name:"Van Basten",pos:"ST",era:"1981–1995",nat:"🇳🇱"},
+  {name:"Shearer",pos:"ST",era:"1988–2006",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Eusebio",pos:"ST",era:"1957–1979",nat:"🇵🇹"},
+  {name:"Puskas",pos:"ST",era:"1943–1966",nat:"🇭🇺"},
+  {name:"Di Stefano",pos:"ST",era:"1945–1966",nat:"🇦🇷"},
+  {name:"Ibrahimovic",pos:"ST",era:"1999–2023",nat:"🇸🇪"},
+  {name:"Shevchenko",pos:"ST",era:"1994–2012",nat:"🇺🇦"},
+  {name:"Suarez",pos:"ST",era:"2005–present",nat:"🇺🇾"},
+  {name:"Lewandowski",pos:"ST",era:"2005–present",nat:"🇵🇱"},
+  {name:"Mbappe",pos:"ST",era:"2015–present",nat:"🇫🇷"},
+  {name:"Haaland",pos:"ST",era:"2016–present",nat:"🇳🇴"},
+  {name:"Tevez",pos:"ST",era:"2001–2019",nat:"🇦🇷"},
+  {name:"Drogba",pos:"ST",era:"1998–2018",nat:"🇨🇮"},
+  {name:"Muller GK",pos:"ST",era:"1964–1981",nat:"🇩🇪"},
+  {name:"Inzaghi",pos:"ST",era:"1991–2012",nat:"🇮🇹"},
+  {name:"Raul",pos:"ST",era:"1992–2015",nat:"🇪🇸"},
+  {name:"Torres",pos:"ST",era:"2001–2019",nat:"🇪🇸"},
+  {name:"Rooney",pos:"ST",era:"2002–2019",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Owen",pos:"ST",era:"1996–2013",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Kane",pos:"ST",era:"2011–present",nat:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {name:"Aguero",pos:"ST",era:"2003–2021",nat:"🇦🇷"},
+];
 
-    if (yourTeam.length >= 20 && aiTeam.length >= 20) {
-      draftComplete = true;
-      document.getElementById("pickSection").style.display = "none";
-      document.getElementById("draftTurn").style.display = "none";
-      document.getElementById("simSection").style.display = "block";
-      return;
-    }
+// Position compatibility map
+const POS_COMPAT = {
+  GK: ["GK"],
+  RB: ["RB","CB","CDM"],
+  LB: ["LB","CB","CDM"],
+  CB: ["CB","CDM","RB","LB"],
+  CDM: ["CDM","CM","CB"],
+  CM: ["CM","CDM","CAM","RW","LW"],
+  CAM: ["CAM","CM","ST","RW","LW"],
+  RW: ["RW","LW","CAM","ST"],
+  LW: ["LW","RW","CAM","ST"],
+  RM: ["RM","RW","CM","LW"],
+  LM: ["LM","LW","CM","RW"],
+  RAM: ["RAM","RW","CAM","CM"],
+  LAM: ["LAM","LW","CAM","CM"],
+  RWB: ["RWB","RB","RM","CM"],
+  LWB: ["LWB","LB","LM","CM"],
+  ST: ["ST","CAM","RW","LW"],
+};
 
-    document.getElementById("draftTurn").textContent = "🟢 Your pick — choose a player!";
-    showNextOptions();
-  }
+let availablePlayers = [];
+let yourSlots = [];
+let aiSlots = [];
+let yourBench = [];
+let aiBench = [];
+let draftComplete = false;
+let currentOptions = [];
 
-  function updateTeamDisplay() {
-    document.getElementById("yourCount").textContent = yourTeam.length;
-    document.getElementById("aiCount").textContent = aiTeam.length;
-    document.getElementById("yourTeam").innerHTML = yourTeam.map(p =>
-      `<span class="player-tag yours">${p}</span>`).join("");
-    document.getElementById("aiTeam").innerHTML = aiTeam.map(p =>
-      `<span class="player-tag ai">${p}</span>`).join("");
-  }
+function getFormationSlots(formation) {
+  return FORMATIONS[formation].map(s => ({...s, player: null}));
+}
 
-  async function simulateMatch() {
-    const btn = document.querySelector(".sim-btn");
-    btn.textContent = "⚽ Simulating...";
-    btn.disabled = true;
-    try {
-      const res = await fetch("/simulate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ your_team: yourTeam, ai_team: aiTeam })
-      });
-      const data = await res.json();
-      document.getElementById("simText").textContent = data.result;
-      document.getElementById("simResult").style.display = "block";
-    } catch (err) {
-      document.getElementById("simText").textContent = "Something went wrong. Please try again.";
-      document.getElementById("simResult").style.display = "block";
-    }
-    btn.textContent = "⚽ Simulate Match!";
-    btn.disabled = false;
-  }
+function initDraft() {
+  availablePlayers = [...ALL_PLAYERS].sort(() => Math.random() - 0.5);
+  const yf = document.getElementById("yourFormation").value;
+  const af = document.getElementById("aiFormation").value;
+  // randomise AI formation
+  const formations = Object.keys(FORMATIONS);
+  document.getElementById("aiFormation").value = formations[Math.floor(Math.random()*formations.length)];
 
-  function resetDraft() {
+  yourSlots = getFormationSlots(yf);
+  aiSlots = getFormationSlots(document.getElementById("aiFormation").value);
+  yourBench = []; aiBench = [];
+  draftComplete = false;
+
+  document.getElementById("aiPickBanner").style.display = "none";
+  document.getElementById("simSection").style.display = "none";
+  document.getElementById("simResult").style.display = "none";
+  document.getElementById("pickSection").style.display = "block";
+  document.getElementById("draftTurnBar").style.display = "block";
+  document.getElementById("draftTurnBar").textContent = "🟢 Your pick — choose a player!";
+
+  renderPitch("yourPitch", yourSlots, false);
+  renderPitch("aiPitch", aiSlots, true);
+  updateBench();
+  showNextOptions();
+}
+
+function changeFormation() {
+  if (yourBench.length === 0 && yourSlots.every(s => !s.player)) {
     initDraft();
   }
+}
 
-  // ── CHAT ──
-  const chatBox = document.getElementById("chatBox");
-  const userInput = document.getElementById("userInput");
-  const sendBtn = document.getElementById("sendBtn");
-  const counter = document.getElementById("counter");
+function renderPitch(pitchId, slots, isAi) {
+  const pitch = document.getElementById(pitchId);
+  // Remove old slots
+  pitch.querySelectorAll(".position-slot").forEach(e => e.remove());
+  slots.forEach((slot, i) => {
+    const el = document.createElement("div");
+    el.className = "position-slot" + (isAi ? " ai-slot" : "") + (slot.player ? " filled" : "");
+    el.style.left = slot.x + "%";
+    el.style.top = slot.y + "%";
+    el.innerHTML = `<div class="slot-circle">${slot.player ? slot.player.nat + "<br>" + slot.player.name.split(" ")[0] : slot.pos}</div><div class="slot-label">${slot.player ? slot.player.name : slot.pos}</div>`;
+    pitch.appendChild(el);
+  });
+}
 
-  userInput.addEventListener("keypress", e => { if (e.key === "Enter") sendMessage(); });
+function updateBench() {
+  document.getElementById("yourBenchCount").textContent = yourBench.length;
+  document.getElementById("aiBenchCount").textContent = aiBench.length;
+  document.getElementById("yourBench").innerHTML = yourBench.map(p => `<span class="bench-tag yours">${p.nat} ${p.name}</span>`).join("");
+  document.getElementById("aiBench").innerHTML = aiBench.map(p => `<span class="bench-tag ai">${p.nat} ${p.name}</span>`).join("");
+}
 
-  function updateCounter(remaining) {
-    counter.textContent = remaining + " questions left today";
-    counter.className = "counter";
-    if (remaining <= 3) counter.className = "counter low";
-    if (remaining === 0) counter.className = "counter empty";
+function placePlayer(slots, player, bench) {
+  // Find best matching slot
+  const compat = POS_COMPAT[player.pos] || [player.pos];
+  let placed = false;
+  for (const compatPos of compat) {
+    const slot = slots.find(s => !s.player && s.pos === compatPos);
+    if (slot) { slot.player = player; placed = true; break; }
   }
-
-  function addMessage(text, role) {
-    const div = document.createElement("div");
-    div.className = "message " + role;
-    div.textContent = text;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
+  if (!placed) {
+    // Try any empty slot
+    const anyEmpty = slots.find(s => !s.player);
+    if (anyEmpty) { anyEmpty.player = player; placed = true; }
   }
+  if (!placed) bench.push(player);
+}
 
-  function addTyping() {
-    const div = document.createElement("div");
-    div.className = "typing"; div.id = "typing";
-    div.textContent = "FootballGPT is thinking...";
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
+function showNextOptions() {
+  const totalYour = yourSlots.filter(s=>s.player).length + yourBench.length;
+  const totalAi = aiSlots.filter(s=>s.player).length + aiBench.length;
+  if (totalYour >= 20 && totalAi >= 20) {
+    endDraft(); return;
   }
+  currentOptions = availablePlayers.splice(0, 5);
+  const grid = document.getElementById("playersGrid");
+  grid.innerHTML = "";
+  currentOptions.forEach((p, i) => {
+    const card = document.createElement("div");
+    card.className = "player-card";
+    card.innerHTML = `<div class="p-nat">${p.nat}</div><div class="p-name">${p.name}</div><div class="p-pos">${p.pos}</div><div class="p-era">${p.era}</div>`;
+    card.onclick = () => yourPick(i);
+    grid.appendChild(card);
+  });
+}
 
-  function removeTyping() {
-    const t = document.getElementById("typing");
-    if (t) t.remove();
+function yourPick(index) {
+  const picked = currentOptions[index];
+  placePlayer(yourSlots, picked, yourBench);
+  renderPitch("yourPitch", yourSlots, false);
+  updateBench();
+
+  const remaining = currentOptions.filter((_, i) => i !== index);
+  availablePlayers = [...remaining, ...availablePlayers];
+
+  document.getElementById("draftTurnBar").textContent = "🤖 AI is picking...";
+  setTimeout(() => aiPick(), 700);
+}
+
+function aiPick() {
+  const aiOptions = availablePlayers.splice(0, 5);
+  // AI tries to pick player that fills a needed position
+  const neededPos = aiSlots.filter(s=>!s.player).map(s=>s.pos);
+  let best = aiOptions.find(p => neededPos.includes(p.pos)) || aiOptions[0];
+  aiTeamPick(best);
+
+  const leftover = aiOptions.filter(p => p.name !== best.name);
+  availablePlayers = [...leftover, ...availablePlayers];
+
+  document.getElementById("aiPickName").textContent = best.name;
+  document.getElementById("aiPickBanner").style.display = "block";
+
+  renderPitch("aiPitch", aiSlots, true);
+  updateBench();
+
+  const totalYour = yourSlots.filter(s=>s.player).length + yourBench.length;
+  const totalAi = aiSlots.filter(s=>s.player).length + aiBench.length;
+  if (totalYour >= 20 && totalAi >= 20) { endDraft(); return; }
+
+  document.getElementById("draftTurnBar").textContent = "🟢 Your pick — choose a player!";
+  showNextOptions();
+}
+
+function aiTeamPick(player) {
+  placePlayer(aiSlots, player, aiBench);
+}
+
+function endDraft() {
+  draftComplete = true;
+  document.getElementById("pickSection").style.display = "none";
+  document.getElementById("draftTurnBar").style.display = "none";
+  document.getElementById("simSection").style.display = "block";
+}
+
+async function simulateMatch() {
+  const btn = document.querySelector(".sim-btn");
+  btn.textContent = "⚽ Simulating...";
+  btn.disabled = true;
+
+  const yourStarters = yourSlots.filter(s=>s.player).map(s=>s.pos+": "+s.player.name);
+  const aiStarters = aiSlots.filter(s=>s.player).map(s=>s.pos+": "+s.player.name);
+  const yourBenchNames = yourBench.map(p=>p.name);
+  const aiBenchNames = aiBench.map(p=>p.name);
+
+  try {
+    const res = await fetch("/simulate", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        your_formation: document.getElementById("yourFormation").value,
+        ai_formation: document.getElementById("aiFormation").value,
+        your_starters: yourStarters,
+        ai_starters: aiStarters,
+        your_bench: yourBenchNames,
+        ai_bench: aiBenchNames,
+      })
+    });
+    const data = await res.json();
+    document.getElementById("simText").textContent = data.result || data.error;
+    document.getElementById("simResult").style.display = "block";
+  } catch(e) {
+    document.getElementById("simText").textContent = "Something went wrong. Please try again.";
+    document.getElementById("simResult").style.display = "block";
   }
+  btn.textContent = "⚽ Simulate Match!";
+  btn.disabled = false;
+}
 
-  async function sendMessage() {
-    const message = userInput.value.trim();
-    if (!message) return;
-    userInput.value = "";
-    sendBtn.disabled = true;
-    addMessage(message, "user");
-    addTyping();
-    try {
-      const res = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-      const data = await res.json();
-      removeTyping();
-      if (data.error === "limit_reached") {
-        addMessage("⛔ " + data.message, "agent");
-        updateCounter(0);
-        userInput.disabled = true;
-        sendBtn.disabled = true;
-        return;
-      }
-      if (data.error === "service_unavailable") {
-        addMessage(data.message, "agent");
-        sendBtn.disabled = false;
-        return;
-      }
-      addMessage(data.response, "agent");
-      updateCounter(data.remaining);
-    } catch (err) {
-      removeTyping();
-      addMessage("⚽ Something went wrong. Please try again!", "agent");
+function resetDraft() { initDraft(); }
+
+// ── CHAT ──
+const chatBox = document.getElementById("chatBox");
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
+const counter = document.getElementById("counter");
+userInput.addEventListener("keypress", e => { if(e.key==="Enter") sendMessage(); });
+
+function updateCounter(r) {
+  counter.textContent = r + " questions left today";
+  counter.className = "counter";
+  if(r<=3) counter.className = "counter low";
+  if(r===0) counter.className = "counter empty";
+}
+function addMessage(text, role) {
+  const d = document.createElement("div");
+  d.className = "message " + role;
+  d.textContent = text;
+  chatBox.appendChild(d);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+function addTyping() {
+  const d = document.createElement("div");
+  d.className = "typing"; d.id = "typing";
+  d.textContent = "FootballGPT is thinking...";
+  chatBox.appendChild(d);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+function removeTyping() { const t=document.getElementById("typing"); if(t) t.remove(); }
+
+async function sendMessage() {
+  const msg = userInput.value.trim();
+  if(!msg) return;
+  userInput.value = "";
+  sendBtn.disabled = true;
+  addMessage(msg, "user");
+  addTyping();
+  try {
+    const res = await fetch("/chat", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({message: msg})
+    });
+    const data = await res.json();
+    removeTyping();
+    if(data.error==="limit_reached") {
+      addMessage("⛔ " + data.message, "agent");
+      updateCounter(0);
+      userInput.disabled = true;
+      sendBtn.disabled = true;
+      return;
     }
-    sendBtn.disabled = false;
-    userInput.focus();
+    if(data.error==="service_unavailable") {
+      addMessage(data.message, "agent");
+      sendBtn.disabled = false;
+      return;
+    }
+    addMessage(data.response, "agent");
+    updateCounter(data.remaining);
+  } catch(e) {
+    removeTyping();
+    addMessage("⚽ Something went wrong. Please try again!", "agent");
   }
+  sendBtn.disabled = false;
+  userInput.focus();
+}
 
-  // ── NAV ──
-  function showPage(page) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
-    document.getElementById("page-" + page).classList.add("active");
-    event.target.classList.add("active");
-    if (page === "draft" && yourTeam.length === 0 && !draftComplete) initDraft();
-  }
+// ── NAV ──
+function showPage(page, btn) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById("page-"+page).classList.add("active");
+  btn.classList.add("active");
+  if(page==="draft" && !draftComplete && yourSlots.length===0) initDraft();
+}
 </script>
 </body>
 </html>

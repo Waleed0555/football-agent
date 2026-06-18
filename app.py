@@ -73,23 +73,49 @@ def simulate():
     data = request.json
     your_team = data.get("your_team", [])
     ai_team = data.get("ai_team", [])
-    prompt = f"""You are simulating a football match between two all-time great squads.
+    your_formation = data.get("your_formation", "4-3-3")
+    ai_formation = data.get("ai_formation", "4-3-3")
+    your_starters = data.get("your_starters", [])
+    ai_starters = data.get("ai_starters", [])
+    your_bench = data.get("your_bench", [])
+    ai_bench = data.get("ai_bench", [])
 
-YOUR TEAM: {', '.join(your_team)}
-AI TEAM: {', '.join(ai_team)}
+    prompt = f"""You are simulating a football match between two all-time great squads. Be a detailed football analyst.
 
-Simulate a realistic match result. Include:
-1. A scoreline (e.g. 2-1)
-2. Goalscorers with minute (e.g. 38 mins Ronaldo)
-3. Man of the Match
-4. A 3-4 sentence match analysis explaining why that team won based on the players chosen
+YOUR TEAM ({your_formation}):
+Starters: {', '.join(your_starters)}
+Bench: {', '.join(your_bench)}
 
-Format it clearly with sections. Be creative and detailed."""
+AI TEAM ({ai_formation}):
+Starters: {', '.join(ai_starters)}
+Bench: {', '.join(ai_bench)}
+
+Analyse both squads considering:
+1. Overall squad quality and individual player greatness
+2. Tactical matchup between the two formations ({your_formation} vs {ai_formation})
+3. Key position battles (e.g. striker vs defenders)
+4. Squad balance — did either team pick too many of the same position?
+5. Add realistic unpredictability — upsets can happen in football
+
+Then simulate a full match. Format your response EXACTLY like this:
+
+FINAL SCORE
+Your Team X - Y AI Team
+
+GOALS
+⚽ [minute]' [player name] ([team])
+(list all goals)
+
+MAN OF THE MATCH
+[player name] - [one sentence why]
+
+MATCH REPORT
+[4-5 sentences analysing the match, tactical battle, key moments and why that result happened based on the squads and formations]"""
 
     try:
         response = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=1000,
+            max_tokens=1500,
             messages=[{"role": "user", "content": prompt}]
         )
         return jsonify({"result": response.content[0].text})
