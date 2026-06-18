@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
 import anthropic
 import os
-from datetime import datetime, date
+from datetime import date
 
 load_dotenv()
 
@@ -67,6 +67,34 @@ def chat():
         if "credit" in error_msg.lower() or "billing" in error_msg.lower():
             return jsonify({"error": "service_unavailable", "message": "⚽ FootballGPT is temporarily unavailable due to high demand. Please check back soon!"}), 503
         return jsonify({"error": "service_unavailable", "message": "⚽ Something went wrong. Please try again in a moment!"}), 503
+
+@app.route("/simulate", methods=["POST"])
+def simulate():
+    data = request.json
+    your_team = data.get("your_team", [])
+    ai_team = data.get("ai_team", [])
+    prompt = f"""You are simulating a football match between two all-time great squads.
+
+YOUR TEAM: {', '.join(your_team)}
+AI TEAM: {', '.join(ai_team)}
+
+Simulate a realistic match result. Include:
+1. A scoreline (e.g. 2-1)
+2. Goalscorers with minute (e.g. 38 mins Ronaldo)
+3. Man of the Match
+4. A 3-4 sentence match analysis explaining why that team won based on the players chosen
+
+Format it clearly with sections. Be creative and detailed."""
+
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1000,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        return jsonify({"result": response.content[0].text})
+    except Exception as e:
+        return jsonify({"error": "Something went wrong with the simulation"}), 503
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
