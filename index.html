@@ -41,8 +41,6 @@
   .formation-bar label { color: #aaa; font-size: 0.75rem; }
   .formation-select { background: #1e1e2e; border: 1px solid #4ade80; color: #4ade80; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
   .draft-status-bar { background: #16213e; border-radius: 6px; padding: 6px 12px; text-align: center; margin-bottom: 10px; font-size: 0.75rem; color: #93c5fd; border: 1px solid #0f3460; }
-
-  /* PITCHES SIDE BY SIDE — SMALLER */
   .pitches-row { display: flex; gap: 10px; margin-bottom: 10px; justify-content: center; }
   .pitch-col { width: 170px; flex-shrink: 0; }
   .pitch-col h3 { font-size: 0.72rem; text-align: center; margin-bottom: 4px; padding: 3px 6px; border-radius: 5px; }
@@ -50,8 +48,6 @@
   .pitch-col.ai-col h3 { color: #f44336; background: #3a1a1a; }
   .pitch { background: linear-gradient(180deg, #1a4a1a 0%, #1e5c1e 50%, #1a4a1a 100%); border: 2px solid #2d6a2d; border-radius: 8px; position: relative; width: 100%; aspect-ratio: 0.65; overflow: hidden; }
   .pitch-lines { position: absolute; inset: 0; pointer-events: none; }
-
-  /* POSITION SLOTS — SMALL */
   .position-slot { position: absolute; transform: translate(-50%, -50%); text-align: center; cursor: pointer; z-index: 2; transition: transform 0.15s; }
   .position-slot:hover { transform: translate(-50%, -50%) scale(1.1); }
   .slot-circle { width: 22px; height: 22px; border-radius: 50%; border: 1.5px dashed #4ade80; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; margin: 0 auto 1px; font-size: 0.42rem; font-weight: bold; color: #4ade80; flex-direction: column; line-height: 1.1; }
@@ -59,13 +55,9 @@
   .position-slot.empty-slot .slot-circle { animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{border-color:#4ade80;} 50%{border-color:#22c55e; box-shadow:0 0 6px #4ade80;} }
   .slot-label { font-size: 0.38rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 36px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
-
-  /* AI SLOTS — SMALL */
   .ai-position-slot { position: absolute; transform: translate(-50%,-50%); text-align: center; z-index: 2; }
   .ai-slot-circle { width: 22px; height: 22px; border-radius: 50%; background: #f44336; border: 1.5px solid #c62828; display: flex; align-items: center; justify-content: center; margin: 0 auto 1px; font-size: 0.42rem; font-weight: bold; color: #fff; flex-direction: column; line-height: 1.1; }
   .ai-slot-label { font-size: 0.38rem; color: rgba(255,255,255,0.8); white-space: nowrap; max-width: 36px; overflow: hidden; text-overflow: ellipsis; text-shadow: 0 1px 2px #000; font-weight: bold; }
-
-  /* BENCH */
   .bench-section { background: #111; border: 1px solid #333; border-radius: 6px; padding: 6px 8px; margin-bottom: 10px; }
   .bench-section h4 { color: #aaa; font-size: 0.68rem; margin-bottom: 4px; }
   .bench-players { display: flex; flex-wrap: wrap; gap: 3px; min-height: 18px; }
@@ -73,8 +65,6 @@
   .bench-add-btn { padding: 2px 6px; border-radius: 8px; font-size: 0.62rem; background: #1a1a1a; color: #555; border: 1px dashed #333; cursor: pointer; }
   .bench-add-btn:hover { border-color: #4ade80; color: #4ade80; }
   .ai-bench-tag { padding: 2px 6px; border-radius: 8px; font-size: 0.62rem; background: #3a1a1a; color: #f44336; border: 1px solid #f44336; }
-
-  /* MODAL */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 100; display: none; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal { background: #16213e; border: 1px solid #0f3460; border-radius: 16px; padding: 20px; width: 92%; max-width: 480px; }
@@ -90,16 +80,12 @@
   .player-card .p-era { color: #555; font-size: 0.55rem; margin-top: 1px; }
   .modal-cancel { margin-top: 12px; width: 100%; background: #1a1a1a; border: 1px solid #333; color: #aaa; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; }
   .modal-cancel:hover { border-color: #f44336; color: #f44336; }
-
-  /* SIM */
   .sim-section { display: none; padding: 14px; text-align: center; }
   .big-btn { border: none; border-radius: 30px; padding: 12px 30px; font-size: 0.9rem; font-weight: bold; cursor: pointer; margin: 5px; transition: transform 0.15s; }
   .big-btn:hover { transform: scale(1.03); }
   .big-btn:disabled { background: #333 !important; color: #666 !important; cursor: not-allowed; transform: none; }
   .green-btn { background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; }
   .red-btn { background: linear-gradient(135deg, #f44336, #c62828); color: #fff; }
-
-  /* MATCH RESULT */
   .match-result-box { background: #0a0a0a; border: 1px solid #4ade80; border-radius: 10px; padding: 14px; margin-top: 12px; display: none; text-align: left; }
   .match-result-box h3 { color: #4ade80; margin-bottom: 8px; font-size: 0.9rem; }
   .match-result-box pre { color: #e0e0e0; font-size: 0.88rem; white-space: pre-wrap; font-family: 'Segoe UI', sans-serif; line-height: 1.8; }
@@ -111,8 +97,6 @@
   .champion-box { background: #0a1a0a; border: 2px solid #f0c040; border-radius: 10px; padding: 16px; margin-top: 12px; text-align: center; display: none; }
   .champion-box h2 { color: #f0c040; font-size: 1.3rem; margin-bottom: 6px; }
   .champion-box p { color: #aaa; font-size: 0.82rem; }
-
-  /* BRACKET */
   .bracket-wrap { background: #16213e; border: 1px solid #0f3460; border-radius: 10px; padding: 12px; margin-bottom: 12px; overflow-x: auto; }
   .bracket-wrap h3 { color: #f0c040; font-size: 0.85rem; margin-bottom: 10px; text-align: center; }
   .bracket { display: flex; align-items: center; min-width: 420px; gap: 0; }
@@ -128,9 +112,35 @@
   .bracket-connector { display: flex; flex-direction: column; justify-content: center; width: 16px; align-items: center; }
   .connector-top { border-top: 1px solid #333; border-right: 1px solid #333; width: 100%; height: 20px; }
   .connector-bottom { border-bottom: 1px solid #333; border-right: 1px solid #333; width: 100%; height: 20px; }
-
   .reset-btn { background: #1e1e2e; color: #aaa; border: 1px solid #333; border-radius: 20px; padding: 8px 20px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
   .reset-btn:hover { border-color: #4ade80; color: #4ade80; }
+
+  /* KIT CHATBOT */
+  .kit-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #4ade80, #22c55e); border: none; cursor: pointer; z-index: 200; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 20px rgba(74,222,128,0.4); transition: transform 0.2s; }
+  .kit-btn:hover { transform: scale(1.1); }
+  .kit-btn .kit-badge { position: absolute; top: -4px; right: -4px; background: #f44336; color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+  .kit-window { position: fixed; bottom: 90px; right: 24px; width: 300px; background: #16213e; border: 1px solid #0f3460; border-radius: 16px; z-index: 200; display: none; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.5); overflow: hidden; max-height: 420px; }
+  .kit-window.open { display: flex; }
+  .kit-header { background: #1a1a2e; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+  .kit-header-left { display: flex; align-items: center; gap: 8px; }
+  .kit-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #4ade80, #22c55e); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .kit-header h4 { color: #fff; font-size: 0.85rem; }
+  .kit-header p { color: #4ade80; font-size: 0.65rem; }
+  .kit-close { background: none; border: none; color: #aaa; cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 4px; }
+  .kit-close:hover { color: #f44336; }
+  .kit-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .kit-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; font-size: 0.78rem; line-height: 1.5; }
+  .kit-msg.kit { background: #1e1e2e; color: #e0e0e0; align-self: flex-start; border-bottom-left-radius: 3px; }
+  .kit-msg.user { background: #4ade80; color: #000; align-self: flex-end; border-bottom-right-radius: 3px; }
+  .kit-typing { color: #555; font-style: italic; font-size: 0.72rem; align-self: flex-start; padding: 4px 8px; }
+  .kit-input-row { padding: 10px 12px; border-top: 1px solid #333; display: flex; gap: 6px; }
+  .kit-input-row input { flex: 1; background: #1e1e2e; border: 1px solid #333; border-radius: 20px; padding: 7px 12px; color: #fff; font-size: 0.78rem; outline: none; }
+  .kit-input-row input:focus { border-color: #4ade80; }
+  .kit-input-row button { background: #4ade80; color: #000; border: none; border-radius: 20px; padding: 7px 14px; font-size: 0.78rem; font-weight: bold; cursor: pointer; }
+  .kit-input-row button:hover { background: #22c55e; }
+  .kit-suggestions { display: flex; flex-wrap: wrap; gap: 4px; padding: 0 12px 8px; }
+  .kit-suggestion { background: #1e1e2e; border: 1px solid #333; color: #aaa; border-radius: 12px; padding: 3px 10px; font-size: 0.68rem; cursor: pointer; transition: all 0.15s; }
+  .kit-suggestion:hover { border-color: #4ade80; color: #4ade80; }
 </style>
 </head>
 <body>
@@ -162,7 +172,6 @@
       <h2>🏆 Build Your Squad & Win the Tournament</h2>
       <p>Draft your team → Beat 3 AI opponents → Become Champion!</p>
     </div>
-
     <div class="formation-bar" id="formationBar">
       <label>Formation:</label>
       <select class="formation-select" id="yourFormation" onchange="resetFormation()">
@@ -177,10 +186,7 @@
       <span style="color:#555;">|</span>
       <span style="color:#aaa;font-size:0.75rem;">Bench: <strong id="benchCountLabel" style="color:#4ade80">0</strong>/9</span>
     </div>
-
     <div class="draft-status-bar" id="draftStatusBar">👆 Click a position on the pitch to pick a player</div>
-
-    <!-- PITCHES -->
     <div class="pitches-row">
       <div class="pitch-col yours">
         <h3>👤 Your Team</h3>
@@ -211,22 +217,16 @@
         </div>
       </div>
     </div>
-
-    <!-- BENCH -->
     <div class="bench-section">
       <h4>🪑 Your Bench (<span id="benchCountDisplay">0</span>/9)</h4>
       <div class="bench-players" id="yourBenchDisplay">
         <button class="bench-add-btn" onclick="openBenchPick()">+ Add bench player</button>
       </div>
     </div>
-
-    <!-- BRACKET -->
     <div class="bracket-wrap" id="bracketWrap" style="display:none;">
       <h3>🏆 Tournament Bracket</h3>
       <div class="bracket" id="bracketDisplay"></div>
     </div>
-
-    <!-- SIM SECTION -->
     <div class="sim-section" id="simSection">
       <h2 style="color:#4ade80;margin-bottom:6px;font-size:1rem;" id="simTitle">✅ Squad Complete!</h2>
       <p style="color:#aaa;font-size:0.8rem;margin-bottom:12px;" id="simSubtitle">Reveal your first opponent!</p>
@@ -248,11 +248,10 @@
         <button class="reset-btn" onclick="fullReset()">🔄 New Tournament</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- PLAYER PICK MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3 id="modalTitle">Choose a player</h3>
@@ -262,7 +261,150 @@
   </div>
 </div>
 
+<!-- KIT FLOATING BUTTON -->
+<button class="kit-btn" onclick="toggleKit()" id="kitBtn">
+  ⚽
+  <span class="kit-badge" id="kitBadge" style="display:none;">1</span>
+</button>
+
+<!-- KIT CHAT WINDOW -->
+<div class="kit-window" id="kitWindow">
+  <div class="kit-header">
+    <div class="kit-header-left">
+      <div class="kit-avatar">🤖</div>
+      <div>
+        <h4>Kit</h4>
+        <p>⚡ Online — here to help</p>
+      </div>
+    </div>
+    <button class="kit-close" onclick="toggleKit()">✕</button>
+  </div>
+  <div class="kit-messages" id="kitMessages">
+    <div class="kit-msg kit">Hey! I'm Kit 👋 I'm here to help you navigate FootballGPT. Ask me anything about how the site works!</div>
+  </div>
+  <div class="kit-suggestions" id="kitSuggestions">
+    <span class="kit-suggestion" onclick="kitAsk('How do I play the tournament?')">How do I play? 🏆</span>
+    <span class="kit-suggestion" onclick="kitAsk('How does the draft work?')">How does draft work? ⚽</span>
+    <span class="kit-suggestion" onclick="kitAsk('What is my daily question limit?')">Daily limit? 💬</span>
+    <span class="kit-suggestion" onclick="kitAsk('What features are coming soon?')">Coming soon? 🔮</span>
+  </div>
+  <div class="kit-input-row">
+    <input type="text" id="kitInput" placeholder="Ask Kit anything..." onkeypress="if(event.key==='Enter')kitSend()" />
+    <button onclick="kitSend()">Send</button>
+  </div>
+</div>
+
 <script>
+// ── KIT SYSTEM PROMPT ──
+const KIT_SYSTEM = `You are Kit, a friendly and helpful assistant for FootballGPT — an AI football analysis website.
+
+YOUR PERSONALITY:
+- Friendly, casual and enthusiastic about football
+- Always helpful and clear
+- Use emojis occasionally but don't overdo it
+- Keep responses short and to the point (2-4 sentences max)
+
+WHAT YOU KNOW ABOUT THE SITE:
+- FootballGPT has two main features: a Chat page and a Tournament mode
+- The Chat page lets users ask football questions — comparing players, teams, eras
+- Users get 10 free questions per day on the chat
+- Tournament mode lets users draft a squad of 20 players (11 starters + 9 bench)
+- Users pick their formation from: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-1-4-1
+- To pick a player, click on any position on the pitch — a popup shows 5 random legends
+- Only players who can play that position will appear
+- The AI secretly builds its own team while you draft yours
+- Once your squad is complete, reveal the AI team and simulate the match
+- The tournament has 3 rounds: Quarter Final, Semi Final, Final
+- Win all 3 to become Champion
+- The match result shows the score, goalscorers and man of the match
+
+COMING SOON (not yet available):
+- User login and accounts
+- Order history and email management
+- Premium plan with unlimited questions
+- Player stats and historical data
+- Mobile app
+
+IF ASKED ABOUT ACCOUNT/LOGIN/ORDERS:
+- These features are coming soon
+- Apologise that they're not available yet
+- Let them know it's being worked on
+
+IF ASKED SOMETHING YOU DON'T KNOW:
+- Be honest that you don't know
+- Suggest they use the main chat for football questions
+- Keep it friendly`;
+
+let kitHistory = [];
+let kitOpen = false;
+let kitHasUnread = false;
+
+function toggleKit() {
+  kitOpen = !kitOpen;
+  document.getElementById("kitWindow").classList.toggle("open", kitOpen);
+  if (kitOpen) {
+    kitHasUnread = false;
+    document.getElementById("kitBadge").style.display = "none";
+    document.getElementById("kitInput").focus();
+  }
+}
+
+function kitAsk(question) {
+  document.getElementById("kitInput").value = question;
+  kitSend();
+  document.getElementById("kitSuggestions").style.display = "none";
+}
+
+async function kitSend() {
+  const input = document.getElementById("kitInput");
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = "";
+  addKitMsg(msg, "user");
+  kitHistory.push({ role: "user", content: msg });
+  const typingEl = addKitTyping();
+  try {
+    const res = await fetch("/chat_kit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: kitHistory, system: KIT_SYSTEM })
+    });
+    const data = await res.json();
+    typingEl.remove();
+    const reply = data.response || "Sorry, I couldn't get a response. Try again!";
+    addKitMsg(reply, "kit");
+    kitHistory.push({ role: "assistant", content: reply });
+    if (!kitOpen) {
+      kitHasUnread = true;
+      document.getElementById("kitBadge").style.display = "flex";
+    }
+  } catch(e) {
+    typingEl.remove();
+    addKitMsg("Something went wrong — please try again!", "kit");
+  }
+}
+
+function addKitMsg(text, role) {
+  const msgs = document.getElementById("kitMessages");
+  const d = document.createElement("div");
+  d.className = "kit-msg " + role;
+  d.textContent = text;
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+
+function addKitTyping() {
+  const msgs = document.getElementById("kitMessages");
+  const d = document.createElement("div");
+  d.className = "kit-typing";
+  d.textContent = "Kit is typing...";
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
+  return d;
+}
+
+// ── FORMATIONS ──
 const FORMATIONS = {
   "4-3-3":[
     {pos:"GK",x:50,y:90},{pos:"RB",x:82,y:76},{pos:"CB",x:62,y:72},{pos:"CB",x:38,y:72},{pos:"LB",x:18,y:76},
@@ -367,15 +509,14 @@ const ALL_PLAYERS = [
   {name:"Pires",pos:"LM",era:"1993–2010",nat:"🇫🇷"},{name:"Recoba",pos:"LM",era:"1994–2011",nat:"🇺🇾"},
 ];
 
-const ROUND_NAMES = ["Quarter Final","Semi Final","Final"];
-const AI_TEAM_NAMES = ["Galaxy XI","Legends FC","World XI","Elite Squad","Dream Team","Immortals FC","All Stars XI","Icons United"];
+const ROUND_NAMES=["Quarter Final","Semi Final","Final"];
+const AI_TEAM_NAMES=["Galaxy XI","Legends FC","World XI","Elite Squad","Dream Team","Immortals FC","All Stars XI","Icons United"];
+let pool=[],yourSlots=[],yourBench=[],pickedNames=new Set();
+let currentSlotIndex=null,isBenchPick=false,draftDone=false;
+let tournamentRound=0,tournamentResults=[];
+let currentAiSlots=[],currentAiFormation="",currentAiBench=[],currentOpponentName="";
 
-let pool=[], yourSlots=[], yourBench=[], pickedNames=new Set();
-let currentSlotIndex=null, isBenchPick=false, draftDone=false;
-let tournamentRound=0, tournamentResults=[];
-let currentAiSlots=[], currentAiFormation="", currentAiBench=[], currentOpponentName="";
-
-function generateAiTeam(excludeNames) {
+function generateAiTeam(excludeNames){
   const formations=Object.keys(FORMATIONS);
   const formation=formations[Math.floor(Math.random()*formations.length)];
   const slots=FORMATIONS[formation].map(s=>({...s,player:null}));
@@ -637,6 +778,7 @@ function updateBracket(){
 
 function fullReset(){initDraft();}
 
+// CHAT
 const chatBox=document.getElementById("chatBox");
 const userInput=document.getElementById("userInput");
 const sendBtn=document.getElementById("sendBtn");

@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
 import anthropic
 import os
+import random
 from datetime import date
 
 load_dotenv()
@@ -78,10 +79,19 @@ def simulate():
     your_team_name = data.get("your_team_name", "Your Team")
     ai_team_name = data.get("ai_team_name", "AI Team")
 
+    score_hint = random.choice([
+        "This should be a low scoring tight game (0-0, 1-0, 1-1, 2-1)",
+        "This should be a high scoring open game (3-2, 4-3, 3-3, 4-2)",
+        "This should be a dominant one-sided win (3-0, 4-0, 4-1, 5-1)",
+        "This should be a moderate scoring game (2-0, 2-1, 1-1, 2-2)"
+    ])
+
     prompt = f"""Simulate a football match between these two squads.
 
 {your_team_name} ({your_formation}): {', '.join(your_starters)}
 {ai_team_name} ({ai_formation}): {', '.join(ai_starters)}
+
+{score_hint}. Vary the scoreline realistically based on squad quality.
 
 Reply in this exact format only, nothing else:
 
@@ -129,6 +139,24 @@ SCORE: X-Y"""
             messages=[{"role": "user", "content": prompt}]
         )
         return jsonify({"result": response.content[0].text})
+    except Exception as e:
+        return jsonify({"error": "Something went wrong"}), 503
+
+@app.route("/chat_kit", methods=["POST"])
+def chat_kit():
+    data = request.json
+    messages = data.get("messages", [])
+    system = data.get("system", "You are Kit, a helpful assistant.")
+    if not messages:
+        return jsonify({"error": "No messages"}), 400
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=300,
+            system=system,
+            messages=messages
+        )
+        return jsonify({"response": response.content[0].text})
     except Exception as e:
         return jsonify({"error": "Something went wrong"}), 503
 
