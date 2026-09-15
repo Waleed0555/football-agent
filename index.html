@@ -3,40 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FootballGPT</title>
+<title>PitchIQ</title>
 <style>
-  // ── AUTH ──
-async function loadUser() {
-  try {
-    const res = await fetch("/api/user");
-    const data = await res.json();
-    const authArea = document.getElementById("authArea");
-    const counter = document.getElementById("counter");
-
-    if (data.logged_in) {
-      authArea.innerHTML = `
-        <span style="color:#aaa;font-size:0.78rem;">Hi, <strong style="color:#4ade80">${data.name.split(" ")[0]}</strong></span>
-        <button onclick="handleLogout()" style="background:none;border:1px solid #333;color:#aaa;padding:4px 12px;border-radius:16px;cursor:pointer;font-size:0.75rem;">Logout</button>
-      `;
-      counter.textContent = `${data.remaining} questions left today`;
-    } else {
-      authArea.innerHTML = `
-        <a href="/login" style="color:#aaa;text-decoration:none;font-size:0.78rem;padding:5px 12px;border:1px solid #333;border-radius:16px;">Login</a>
-        <a href="/signup" style="background:#4ade80;color:#000;text-decoration:none;font-size:0.78rem;padding:5px 12px;border-radius:16px;font-weight:bold;">Sign Up</a>
-      `;
-      counter.textContent = `${data.remaining} questions left today`;
-    }
-  } catch(e) {
-    console.error("Auth load failed", e);
-  }
-}
-
-async function handleLogout() {
-  await fetch("/api/logout", { method: "POST" });
-  window.location.reload();
-}
-
-loadUser();
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0a0a0a; font-family: 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
   .navbar { background: #1a1a2e; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; height: 56px; flex-shrink: 0; }
@@ -147,11 +115,12 @@ loadUser();
   .reset-btn { background: #1e1e2e; color: #aaa; border: 1px solid #333; border-radius: 20px; padding: 8px 20px; cursor: pointer; font-size: 0.8rem; margin-top: 10px; }
   .reset-btn:hover { border-color: #4ade80; color: #4ade80; }
 
-  /* KIT CHATBOT */
-  .kit-btn { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #4ade80, #22c55e); border: none; cursor: pointer; z-index: 200; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 4px 20px rgba(74,222,128,0.4); transition: transform 0.2s; }
-  .kit-btn:hover { transform: scale(1.1); }
-  .kit-btn .kit-badge { position: absolute; top: -4px; right: -4px; background: #f44336; color: #fff; border-radius: 50%; width: 18px; height: 18px; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
-  .kit-window { position: fixed; bottom: 90px; right: 24px; width: 300px; background: #16213e; border: 1px solid #0f3460; border-radius: 16px; z-index: 200; display: none; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.5); overflow: hidden; max-height: 420px; }
+  /* KIT SIDE TAB */
+  .kit-side-tab { position: fixed; right: -82px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #4ade80, #22c55e); color: #000; padding: 12px 16px 12px 14px; border-radius: 12px 0 0 12px; cursor: pointer; z-index: 200; display: flex; align-items: center; gap: 8px; box-shadow: -4px 0 20px rgba(74,222,128,0.3); transition: right 0.3s ease; font-weight: bold; font-size: 0.8rem; }
+  .kit-side-tab:hover { right: 0; }
+  .kit-tab-icon { font-size: 1.2rem; }
+  .kit-tab-text { white-space: nowrap; font-size: 0.75rem; }
+  .kit-window { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #16213e; border: 1px solid #0f3460; border-radius: 16px; z-index: 200; display: none; flex-direction: column; box-shadow: 0 8px 32px rgba(0,0,0,0.5); overflow: hidden; max-height: 420px; }
   .kit-window.open { display: flex; }
   .kit-header { background: #1a1a2e; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
   .kit-header-left { display: flex; align-items: center; gap: 8px; }
@@ -178,18 +147,21 @@ loadUser();
 <body>
 
 <div class="navbar">
-  <h1>⚽ FootballGPT</h1>
+  <h1>⚽ PitchIQ</h1>
   <div class="nav-links">
     <button class="nav-btn active" onclick="showPage('chat',this)">💬 Chat</button>
     <button class="nav-btn" onclick="showPage('draft',this)">🏆 Tournament</button>
   </div>
-  <div class="counter" id="counter">10 questions left today</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="counter" id="counter">10 questions left today</div>
+    <div id="authArea"></div>
+  </div>
 </div>
 
 <!-- CHAT PAGE -->
 <div class="page active" id="page-chat">
   <div class="chat-box" id="chatBox">
-    <div class="message agent">👋 Welcome to FootballGPT! You have 10 free questions today.<br><br>Try:<br>• "Who was better, Pele or Maradona?"<br>• "Compare 1999 Man Utd vs 2009 Barcelona"<br>• "Who had the better prime — Henry or Ronaldo 9?"</div>
+    <div class="message agent">👋 Welcome to PitchIQ! You have 10 free questions today. Sign up free for 20!<br><br>Try:<br>• "Who was better, Pele or Maradona?"<br>• "Compare 1999 Man Utd vs 2009 Barcelona"<br>• "Who had the better prime — Henry or Ronaldo 9?"</div>
   </div>
   <div class="input-area">
     <input type="text" id="userInput" placeholder="Ask a football question..." />
@@ -293,11 +265,11 @@ loadUser();
   </div>
 </div>
 
-<!-- KIT FLOATING BUTTON -->
-<button class="kit-btn" onclick="toggleKit()" id="kitBtn">
-  ⚽
-  <span class="kit-badge" id="kitBadge" style="display:none;">1</span>
-</button>
+<!-- KIT SIDE TAB -->
+<div class="kit-side-tab" id="kitSideTab" onclick="toggleKit()">
+  <span class="kit-tab-icon">🤖</span>
+  <span class="kit-tab-text">Need help?</span>
+</div>
 
 <!-- KIT CHAT WINDOW -->
 <div class="kit-window" id="kitWindow">
@@ -312,11 +284,11 @@ loadUser();
     <button class="kit-close" onclick="toggleKit()">✕</button>
   </div>
   <div class="kit-messages" id="kitMessages">
-    <div class="kit-msg kit">Hey! I'm Kit 👋 I'm here to help you navigate FootballGPT. Ask me anything about how the site works!</div>
+    <div class="kit-msg kit">Hey! I'm Kit 👋 I'm here to help you navigate PitchIQ. Ask me anything about how the site works!</div>
   </div>
   <div class="kit-suggestions" id="kitSuggestions">
     <span class="kit-suggestion" onclick="kitAsk('How do I play the tournament?')">How do I play? 🏆</span>
-    <span class="kit-suggestion" onclick="kitAsk('How does the draft work?')">How does draft work? ⚽</span>
+    <span class="kit-suggestion" onclick="kitAsk('How does the draft work?')">Draft? ⚽</span>
     <span class="kit-suggestion" onclick="kitAsk('What is my daily question limit?')">Daily limit? 💬</span>
     <span class="kit-suggestion" onclick="kitAsk('What features are coming soon?')">Coming soon? 🔮</span>
   </div>
@@ -327,8 +299,38 @@ loadUser();
 </div>
 
 <script>
-// ── KIT SYSTEM PROMPT ──
-const KIT_SYSTEM = `You are Kit, a friendly and helpful assistant for FootballGPT — an AI football analysis website.
+// ── AUTH ──
+async function loadUser() {
+  try {
+    const res = await fetch("/api/user");
+    const data = await res.json();
+    const authArea = document.getElementById("authArea");
+    const counter = document.getElementById("counter");
+    if (data.logged_in) {
+      authArea.innerHTML = `
+        <span style="color:#aaa;font-size:0.78rem;">Hi, <strong style="color:#4ade80">${data.name.split(" ")[0]}</strong></span>
+        <button onclick="handleLogout()" style="background:none;border:1px solid #333;color:#aaa;padding:4px 12px;border-radius:16px;cursor:pointer;font-size:0.75rem;">Logout</button>
+      `;
+    } else {
+      authArea.innerHTML = `
+        <a href="/login" style="color:#aaa;text-decoration:none;font-size:0.78rem;padding:5px 12px;border:1px solid #333;border-radius:16px;">Login</a>
+        <a href="/signup" style="background:#4ade80;color:#000;text-decoration:none;font-size:0.78rem;padding:5px 12px;border-radius:16px;font-weight:bold;">Sign Up</a>
+      `;
+    }
+    counter.textContent = `${data.remaining} questions left today`;
+    updateCounter(data.remaining);
+  } catch(e) { console.error("Auth load failed", e); }
+}
+
+async function handleLogout() {
+  await fetch("/api/logout", { method: "POST" });
+  window.location.reload();
+}
+
+loadUser();
+
+// ── KIT ──
+const KIT_SYSTEM = `You are Kit, a friendly and helpful assistant for PitchIQ — an AI football analysis website.
 
 YOUR PERSONALITY:
 - Friendly, casual and enthusiastic about football
@@ -337,9 +339,9 @@ YOUR PERSONALITY:
 - Keep responses short and to the point (2-4 sentences max)
 
 WHAT YOU KNOW ABOUT THE SITE:
-- FootballGPT has two main features: a Chat page and a Tournament mode
+- PitchIQ has two main features: a Chat page and a Tournament mode
 - The Chat page lets users ask football questions — comparing players, teams, eras
-- Users get 10 free questions per day on the chat
+- Guests get 10 free questions per day, logged in users get 20
 - Tournament mode lets users draft a squad of 20 players (11 starters + 9 bench)
 - Users pick their formation from: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-1-4-1
 - To pick a player, click on any position on the pitch — a popup shows 5 random legends
@@ -349,36 +351,26 @@ WHAT YOU KNOW ABOUT THE SITE:
 - The tournament has 3 rounds: Quarter Final, Semi Final, Final
 - Win all 3 to become Champion
 - The match result shows the score, goalscorers and man of the match
+- Users can sign up free to get 20 questions per day instead of 10
 
-COMING SOON (not yet available):
-- User login and accounts
-- Order history and email management
+COMING SOON:
+- Email verification
+- Forgot password
 - Premium plan with unlimited questions
-- Player stats and historical data
+- Match history
 - Mobile app
 
 IF ASKED ABOUT ACCOUNT/LOGIN/ORDERS:
-- These features are coming soon
-- Apologise that they're not available yet
-- Let them know it's being worked on
-
-IF ASKED SOMETHING YOU DON'T KNOW:
-- Be honest that you don't know
-- Suggest they use the main chat for football questions
-- Keep it friendly`;
+- Direct them to the login or signup page
+- Let them know signing up is free and gives 20 questions per day`;
 
 let kitHistory = [];
 let kitOpen = false;
-let kitHasUnread = false;
 
 function toggleKit() {
   kitOpen = !kitOpen;
   document.getElementById("kitWindow").classList.toggle("open", kitOpen);
-  if (kitOpen) {
-    kitHasUnread = false;
-    document.getElementById("kitBadge").style.display = "none";
-    document.getElementById("kitInput").focus();
-  }
+  if (kitOpen) document.getElementById("kitInput").focus();
 }
 
 function kitAsk(question) {
@@ -406,10 +398,6 @@ async function kitSend() {
     const reply = data.response || "Sorry, I couldn't get a response. Try again!";
     addKitMsg(reply, "kit");
     kitHistory.push({ role: "assistant", content: reply });
-    if (!kitOpen) {
-      kitHasUnread = true;
-      document.getElementById("kitBadge").style.display = "flex";
-    }
   } catch(e) {
     typingEl.remove();
     addKitMsg("Something went wrong — please try again!", "kit");
@@ -830,7 +818,7 @@ function addMessage(text,role){
 }
 function addTyping(){
   const d=document.createElement("div");
-  d.className="typing";d.id="typing";d.textContent="FootballGPT is thinking...";
+  d.className="typing";d.id="typing";d.textContent="PitchIQ is thinking...";
   chatBox.appendChild(d);chatBox.scrollTop=chatBox.scrollHeight;
 }
 function removeTyping(){const t=document.getElementById("typing");if(t)t.remove();}
